@@ -1,5 +1,5 @@
 /** Class that determines whether or not a year is a leap year.
- *  @author YOUR NAME HERE
+ *  @author 黄建涛
  */
 public class LeapYear {
 
@@ -12,6 +12,21 @@ public class LeapYear {
         } else {
             System.out.printf("%d is not a leap year.\n", year);
         }
+    }
+
+    /**
+     * 判断一个年份是否为闰年。
+     * @param year 年份
+     * @return 如果 year 是闰年，返回 true，否则返回 false。
+     * 闰年指的是一个年份可以：
+     *  1. 被400整除
+     *  2. 能被4整除但不能被100整除
+     */
+    public static boolean isLeapYear(int year) {
+        if (year % 400 == 0) {
+            return true;
+        }
+        return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
     }
 
     /** Must be provided an integer as a command line argument ARGS. */
