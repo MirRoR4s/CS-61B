@@ -19,6 +19,6 @@
 ## 学习进度
 
 - 2024年01月18日 09:50:06 完成实验一（hw0 在这之前的某个时间我完成了，但没有记录下来）
-- 
+- 2024年01月18日 10:15 分看到 [lab2](http://sp19.datastructur.es/materials/lab/lab2/lab2)。
 
-> 合理的学习路径似乎是先看 guide、video、slides、reading，最后开始做 lab 和 hw。
+> 我规划的学习路径是 reading、video、lab、hw、guide、slides
