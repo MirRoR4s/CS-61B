@@ -21,5 +21,15 @@
 - 2024年01月18日 09:50:06 完成实验一（hw0 在这之前的某个时间我完成了，但没有记录下来）
 - 2024年01月18日 10:15 分看到 [lab2](http://sp19.datastructur.es/materials/lab/lab2/lab2)。
 - 2024年01月19日 11:18:34，基本完成 lab2 了，尝试提交（经过自动评分器的审核，拿下该实验所有得分点！）
+- 2024年01月19日 21:37 分做完 2.1 的 guide 中的练习（虽然好像之前就做过了）
 
-> 我规划的学习路径是 reading、video、lab、hw、guide、slides
+我规划的学习路径是：
+
+1. reading
+2. video
+3. lab
+4. hw（如果有）
+5. guide
+6. slides
+
+> 完成 reding 后再来一遍 video 再加上一个 lab 十分舒适。
