@@ -82,7 +82,31 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+//        /*
+//        迭代版本
+//        可能会修改 A，那么就直接把 B 连接到 A 的后面即可。
+//        现在遍历链表 A 找到其最后一个节点，然后设置该节点的下一个节点为 B 的第一个节点。
+//         */
+//        IntList p = A;
+//        while (p.rest != null) {
+//            p = p.rest;
+//        }
+//        // 此时 p 应是 A 的最后一个节点，因为其后面没有节点了。
+//        p.rest = B;
+//        // 此时已将 A、B 相连，尤其注意不要返回 p，这样会丢掉A的前两个节点，要直接返回A！
+//        return A;
+          /*
+          递归版本
+          基本情况：当 A 是 null 时，返回 B
+          递归情况：否则
+           */
+        if (A == null) {
+            return B;
+        }
+        A.rest = dcatenate(A.rest, B);
+        return A;
+
+
     }
 
     /**
@@ -91,7 +115,34 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        /*
+        迭代版
+        现在不要修改 A，可以用 new，那就新建一个链表，然后把 A、B 的节点放进去！
+         */
+//        if (A == null) {
+//            return B;
+//        }
+//        IntList result = new IntList(A.first, null);
+//        IntList head = result;
+//        IntList p = A.rest;
+//        while (p != null) {
+//            head.rest = new IntList(p.first, p.rest);
+//            p = p.rest;
+//            head = head.rest;
+//        }
+//        // 现在 result 应该和 A 一样了，我们再把 B 放到 result 后边
+//        head.rest = B;
+//        return result;
+        /*
+        递归版
+        基本情况：A 是 null，返回 B
+        递归情况：新建一个节点，内容和 A 一样
+         */
+        if (A == null) {
+            return B;
+        }
+        return new IntList(A.first, catenate(A.rest, B));
+
     }
 
 

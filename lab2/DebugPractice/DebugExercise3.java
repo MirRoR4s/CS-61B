@@ -8,6 +8,7 @@ public class DebugExercise3 {
             String vendor = in.readString();
             String foodType = in.readString();
             double cost = in.readDouble();
+            // csv 文件 89 行 商品数量为负数，猜测多输入了一个负号，在文件中删去答案就正常了
             int numAvailable = in.readInt();
             if (foodType.equals("turnip")) {
                 int newTotal = totalTurnips + numAvailable;
