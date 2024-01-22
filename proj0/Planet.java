@@ -88,5 +88,14 @@ public class Planet {
         yyPos += yyVel * dt;
     }
 
+    /**
+     * 在当前行星的位置绘制 imgFileName 图片
+     */
+    public void draw() {
+        imgFileName = "images/" + imgFileName;
+        StdDraw.picture(xxPos, yyPos, imgFileName);
+        StdDraw.show();
+    }
+
 
 }
