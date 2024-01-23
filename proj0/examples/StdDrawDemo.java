@@ -73,7 +73,7 @@ public class StdDrawDemo {
 		  * for CS61B. Just know that if you don't call this function, any attempt
 		  * at smooth animation will look bad and flickery (remove it and see 
 		  * what happens!). */
-		StdDraw.enableDoubleBuffering();
+		// StdDraw.enableDoubleBuffering();
 
 
 		double size = 100;
@@ -98,6 +98,6 @@ public class StdDrawDemo {
 		
 		drawThree();
 		drawRandom();
-		// drawZoom();
+		drawZoom();
 	}
 } 

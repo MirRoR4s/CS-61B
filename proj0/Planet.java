@@ -25,11 +25,15 @@ public class Planet {
         imgFileName = p.imgFileName;
     }
 
+    /**
+     * 计算两个星期间的距离
+     * @param p 星球p
+     * @return 当前星球和 p 星球的距离
+     */
     public double calcDistance(Planet p) {
         double dx = p.xxPos - xxPos;
         double dy = p.yyPos - yyPos;
         return Math.sqrt(dx * dx + (dy * dy));
-
     }
 
     /**
@@ -92,9 +96,9 @@ public class Planet {
      * 在当前行星的位置绘制 imgFileName 图片
      */
     public void draw() {
-        imgFileName = "images/" + imgFileName;
-        StdDraw.picture(xxPos, yyPos, imgFileName);
-        StdDraw.show();
+        // imgFileName = "images/" + imgFileName;
+        StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
+        // StdDraw.show();
     }
 
 

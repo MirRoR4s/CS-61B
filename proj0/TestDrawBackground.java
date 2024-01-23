@@ -4,7 +4,7 @@ public class TestDrawBackground {
     }
 
     private static void testDrawBackground() {
-        NBody.drawBackground();
+        NBody.drawBackground(2.50e+11);
     }
     
 }
