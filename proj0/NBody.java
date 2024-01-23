@@ -24,6 +24,9 @@ public class NBody {
         Planet[] planets = new Planet[planetNum];
         int cnt = 0;
         while (!in.isEmpty()) {
+            if (cnt == planetNum) {
+                break;
+            }
             double xxPos = in.readDouble();
             double yyPos = in.readDouble();
             double xxVel = in.readDouble();
@@ -51,7 +54,7 @@ public class NBody {
      * 以 radius 为比例绘制背景图
      * @param radius 比例
      */
-    public static void drawBackground(double radius) {
+    private static void drawBackground(double radius) {
         StdDraw.setScale(-radius, radius);
         StdDraw.clear();
         StdDraw.picture(0, 0, "images/starfield.jpg");
@@ -62,7 +65,7 @@ public class NBody {
      * 绘制所有行星
      * @param planets 包含所有行星的数组
      */
-    public static void drawPlanets(Planet[] planets) {
+    private static void drawPlanets(Planet[] planets) {
         for (Planet planet: planets) {
             planet.draw();
         }
@@ -71,7 +74,7 @@ public class NBody {
     /**
      * 创建动画
      */
-    public static void drawAnimation(double T, double dt, double radius, Planet[] planets) {
+    private static void drawAnimation(double T, double dt, double radius, Planet[] planets) {
         // 启用双缓冲
         StdDraw.enableDoubleBuffering();
         double t = 0.0;
