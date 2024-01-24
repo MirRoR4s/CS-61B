@@ -117,6 +117,7 @@ public class LinkedListDeque<T> {
      */
     public T removeLast() {
         if (size > 0) {
+            size -= 1;
             return sentinel.prev.item;
         }
         return null;
@@ -147,9 +148,14 @@ public class LinkedListDeque<T> {
      * @return
      */
     public T getRecursive(int index) {
-        return null;
+
+        return getRecursive(sentinel.next, index);
     }
 
-
+    private T getRecursive(IntNode p, int index) {
+        if (index == 0) {
+            return p.item;
+        }
+        return getRecursive(p.next, index-1);
+    }
 }
-        
