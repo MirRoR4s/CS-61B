@@ -50,20 +50,20 @@ public class SLList {
      * 翻转当前链表，不要使用 new
      */
     public void reverse() {
-        IntNode frontOfReversed = null;
-        IntNode nextNodeToAdd = first;
-        while (nextNodeToAdd != null) {
-            // 用一个节点存储当前节点的下一个节点
-            IntNode remainderOfOriginal = nextNodeToAdd.next;
-            // 将当前节点下一个节点置空
-            nextNodeToAdd.next = frontOfReversed;
-            // 指向当前节点
-            frontOfReversed = nextNodeToAdd;
-            // 将当前节点指向原始的下一个节点
-            nextNodeToAdd = remainderOfOriginal;
+        /*
+        反转单链表的思想在于不断地进行 addFirst 操作，实现后来居上的效果。值的注意的是这个操作并不需要 new 一个新的节点
+         */
+        // 新链表头节点
+        IntNode nHead = null;
+        // 旧链表头节点
+        IntNode p = first;
+        while (p != null) {
+            IntNode tmp = p.next;
+            p.next = nHead;
+            nHead = p;
+            p = tmp;
         }
-        first = frontOfReversed;
-
+        first = nHead;
 
     }
 }
