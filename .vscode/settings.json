@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.idea": true,
+        "**/out": true,
+        "**/*.iml": true
+    }
+}
