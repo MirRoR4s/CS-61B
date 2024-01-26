@@ -8,20 +8,18 @@
  * @author 黄建涛
  */
 public class ArrayDeque<T> {
-    /*
-     * get(i) = items[(nextFirst + 1 + i) % items.length]
-     * addLast(int x): items[nextLast] =
-     */
-    int nextFirst;
-    int nextLast;
+    // 指向队首元素的位置
+    int front;
+    // 指向队尾元素的下一个位置
+    int back;
     private T[] items;
     private int size;
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 0;
-        nextLast = items.length - 1;
+        front = 0;
+        back = 0;
     }
 
     /**
@@ -30,8 +28,12 @@ public class ArrayDeque<T> {
      */
     private void reSize(int cap) {
         T[] newArray = (T[]) new Object[cap];
-        System.arraycopy(items, 0, newArray, 0, size);
+        for (int i = 0; i < size; i++) {
+            newArray[i] = items[(front + i) % items.length];
+        }
         items = newArray;
+        front = 0;
+        back = size;
     }
 
     /**
@@ -42,9 +44,9 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             reSize(size * 2);
         }
-        items[nextFirst] = item;
-        nextFirst = (nextFirst - 1 + items.length) % items.length;
-        size += 1;
+        front = (front -1 + items.length) % items.length;
+        items[front] = item;
+        size++;
     }
 
     /**
@@ -55,11 +57,8 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             reSize(items.length * 2);
         }
-        if (nextLast + nextFirst + 1 == items.length) {
-            nextFirst += 1;
-        }
-        items[nextLast] = item;
-        nextLast = (nextLast + 1) % items.length;
+        items[back] = item;
+        back = (back + 1) % items.length;
         size += 1;
     }
 
@@ -98,12 +97,10 @@ public class ArrayDeque<T> {
      * @return 原队首元素
      */
     public T removeFirst() {
-        int tmp = (nextFirst + 1) % items.length;
-        T head = items[tmp];
-        items[tmp] = null;
-        nextFirst = tmp;
+        T tmp = items[front];
+        front = (front + 1) % items.length;
         size = size - 1;
-        return head;
+        return tmp;
     }
 
     /**
@@ -111,11 +108,14 @@ public class ArrayDeque<T> {
      * @return 原队尾元素
      */
     public T removeLast() {
-        int tmp = (nextLast - 1) % items.length;
-        T tail = items[tmp];
-        items[tmp] = null;
-        size -= 1;
-        return tail;
+        // 最后一个元素的索引
+        int lastIndex = back - 1;
+        T tmp = items[lastIndex];
+        // 删除最后一个元素
+        items[lastIndex] = null;
+        back = (lastIndex) % items.length;
+        size = size - 1;
+        return tmp;
     }
 
     /**
@@ -124,6 +124,6 @@ public class ArrayDeque<T> {
      * @return  index 索引处对应的队列元素
      */
     public T get(int index) {
-        return items[(nextFirst + 1 + index) % items.length];
+        return items[(front + index) % items.length];
     }
 }
