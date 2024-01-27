@@ -2,17 +2,17 @@
  * @see https://sp18.datastructur.es/materials/proj/proj1a/proj1a
  * @see https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html
  * @author Huang Jian Tao
-*/
+ */
 public class LinkedListDeque<T> {
     /*
-    * 一个环型双端队列实现，以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
-    * 环形双端队列代表链表的最后一个元素的 next 指向哨兵节点，哨兵节点的 next 指向第一个元素，哨兵节点的 prev 指向最后一个元素。
-    * 一些注意事项：
-    * add 和 remove 操作不得涉及循环或递归，并且所花费的时间与队列的大小无关（这两类操作以常量时间进行）
-    * size 操作必须以常量时间进行
-    * get 必须使用迭代而非递归
-    * 程序在任意给定时间所占内存应和队列的大小成正比
-    * 不要保留已不在队列中的元素的引用
+     * 一个环型双端队列实现，以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
+     * 环形双端队列代表链表的最后一个元素的 next 指向哨兵节点，哨兵节点的 next 指向第一个元素，哨兵节点的 prev 指向最后一个元素。
+     * 一些注意事项：
+     * add 和 remove 操作不得涉及循环或递归，并且所花费的时间与队列的大小无关（这两类操作以常量时间进行）
+     * size 操作必须以常量时间进行
+     * get 必须使用迭代而非递归
+     * 程序在任意给定时间所占内存应和队列的大小成正比
+     * 不要保留已不在队列中的元素的引用
      */
     // 哨兵节点
     private IntNode sentinel;
@@ -43,6 +43,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 将 item 置于队首
+     * 
      * @param item
      */
     public void addFirst(T item) {
@@ -57,6 +58,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 将 item 置于队尾
+     * 
      * @param item
      */
     public void addLast(T item) {
@@ -70,6 +72,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 判断队列是否为空
+     * 
      * @return 如果队列为空返回 true，否则返回 false
      */
     public boolean isEmpty() {
@@ -78,6 +81,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 获取队列长度
+     * 
      * @return 队列长度
      */
     public int size() {
@@ -98,6 +102,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 删除并返回队首元素
+     * 
      * @return 队首元素，如果不存在返回 null
      */
     public T removeFirst() {
@@ -117,6 +122,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 删除并返回队尾元素
+     * 
      * @return 队尾元素，如果不存在返回 null
      */
     public T removeLast() {
@@ -134,6 +140,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 获取队列第 index 个元素（从零开始）
+     * 
      * @param index 下标
      * @return 队列第 index 个元素，如果不存在则返回 null
      */
@@ -153,6 +160,7 @@ public class LinkedListDeque<T> {
 
     /**
      * 与 get 相同，但采用递归实现
+     * 
      * @param index
      * @return
      */
@@ -165,7 +173,6 @@ public class LinkedListDeque<T> {
         if (index == 0) {
             return p.item;
         }
-        return getRecursive(p.next, index-1);
+        return getRecursive(p.next, index - 1);
     }
 }
-
