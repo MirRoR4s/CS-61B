@@ -1,6 +1,7 @@
-/**@see https://sp18.datastructur.es/materials/proj/proj1a/proj1a
+/**
+ * @see https://sp18.datastructur.es/materials/proj/proj1a/proj1a
  * @see https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html
-* @author 黄建涛
+ * @author Huang Jian Tao
 */
 public class LinkedListDeque<T> {
     /*
