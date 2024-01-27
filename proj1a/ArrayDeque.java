@@ -4,9 +4,8 @@
  * 3. 常量时间获取长度
  * 4. 数组的起始长度为 8
  * 5. 程序所用内存与项数成正比，对于长度 16 以上的数组，其使用率至少应该在 25 % 以上
- *
  * @author 黄建涛
- */
+*/
 public class ArrayDeque<T> {
     // 指向队首元素的位置
     private int front;
@@ -97,10 +96,13 @@ public class ArrayDeque<T> {
      * @return 原队首元素
      */
     public T removeFirst() {
-        T tmp = items[front];
-        front = (front + 1) % items.length;
-        size = size - 1;
-        return tmp;
+        if (size > 0) {
+            T tmp = items[front];
+            front = (front + 1) % items.length;
+            size = size - 1;
+            return tmp;
+        }
+        return null;
     }
 
     /**
@@ -108,6 +110,7 @@ public class ArrayDeque<T> {
      * @return 原队尾元素
      */
     public T removeLast() {
+        if (size > 0) {
         // 最后一个元素的索引
         int lastIndex = (back - 1 + items.length) % items.length;
         T tmp = items[lastIndex];
@@ -116,6 +119,8 @@ public class ArrayDeque<T> {
         back = lastIndex;
         size = size - 1;
         return tmp;
+        }
+        return null;
     }
 
     /**

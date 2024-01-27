@@ -50,10 +50,16 @@ public class ArrayDequeTest {
         ad1.addLast(3);
         int ans = ad1.removeFirst();
         assertEquals(1, ans);
+        assertEquals(ad1.size(), 2);
         ans = ad1.removeFirst();
         assertEquals(2, ans);
+        assertEquals(ad1.size(), 1);
         ans = ad1.removeFirst();
         assertEquals(3, ans);
+        assertEquals(ad1.size(), 0);
+        ad1.removeFirst();
+        assertEquals(ad1.size(), 0);
+        
     }
 
 
