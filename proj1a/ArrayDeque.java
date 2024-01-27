@@ -8,6 +8,7 @@
  * 
  * @author 黄建涛
  */
+
 public class ArrayDeque<T> {
     // 指向队首元素的位置
     private int front;

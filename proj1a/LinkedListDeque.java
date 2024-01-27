@@ -3,6 +3,7 @@
  * @see https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html
  * @author Huang Jian Tao
  */
+
 public class LinkedListDeque<T> {
     /*
      * 一个环型双端队列实现，以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
