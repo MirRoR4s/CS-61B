@@ -1,10 +1,11 @@
 /**@see https://sp18.datastructur.es/materials/proj/proj1a/proj1a
- * @author 黄建涛
- *
- */
+ * @see https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html
+* @author 黄建涛
+*/
 public class LinkedListDeque<T> {
     /*
-    * 一个双端队列的实现（环形），以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
+    * 一个环型双端队列实现，以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
+    * 环形双端队列代表链表的最后一个元素的 next 指向哨兵节点，哨兵节点的 next 指向第一个元素，哨兵节点的 prev 指向最后一个元素。
     * 一些注意事项：
     * add 和 remove 操作不得涉及循环或递归，并且所花费的时间与队列的大小无关（这两类操作以常量时间进行）
     * size 操作必须以常量时间进行
@@ -12,13 +13,15 @@ public class LinkedListDeque<T> {
     * 程序在任意给定时间所占内存应和队列的大小成正比
     * 不要保留已不在队列中的元素的引用
      */
+    // 哨兵节点
     private IntNode sentinel;
+    // 记录链表长度
     private int size;
 
-    public class IntNode {
-        public IntNode prev;
-        public IntNode next;
-        public T item;
+    private class IntNode {
+        private IntNode prev;
+        private IntNode next;
+        private T item;
 
         public IntNode(T item, IntNode prev, IntNode next) {
             this.item = item;
@@ -34,7 +37,7 @@ public class LinkedListDeque<T> {
         sentinel = new IntNode(null, null, null);
         // 当链表为空时，prev 和 next 都指向哨兵节点自身。
         sentinel.prev = sentinel;
-        sentinel.next = sentinel.prev;
+        sentinel.next = sentinel;
     }
 
     /**
@@ -117,8 +120,13 @@ public class LinkedListDeque<T> {
      */
     public T removeLast() {
         if (size > 0) {
-            size -= 1;
-            return sentinel.prev.item;
+            T ans = sentinel.prev.item;
+            // 将哨兵指向倒数第二个节点
+            sentinel.prev = sentinel.prev.prev;
+            // 将倒数第二个节点的 next 改为哨兵
+            sentinel.prev.next = sentinel;
+            size--;
+            return ans;
         }
         return null;
     }
@@ -159,3 +167,4 @@ public class LinkedListDeque<T> {
         return getRecursive(p.next, index-1);
     }
 }
+

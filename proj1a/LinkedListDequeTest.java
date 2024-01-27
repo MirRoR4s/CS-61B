@@ -1,6 +1,49 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
-	
+	@Test
+	public void testRemoveLast() {
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+		lld1.addLast(1);
+		int ans = lld1.removeLast();
+		assertEquals(1, ans);
+		assertEquals(lld1.size(), 0);
+		lld1.addLast(1);
+		lld1.addLast(2);
+		ans = lld1.removeLast();
+		assertEquals(2, ans);
+		assertEquals(lld1.size(), 1);
+	}
+
+	@Test
+	public void testGet() {
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+		lld1.addLast(1);
+		lld1.addLast(2);
+		int ans = lld1.get(0);
+		assertEquals(1, ans);
+		ans = lld1.get(1);
+		assertEquals(2, ans);
+		lld1.addFirst(3);
+		ans = lld1.get(0);
+		assertEquals(3, ans);
+	}
+
+	@Test
+	public void testGetRecursive() {
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+		lld1.addLast(1);
+		lld1.addLast(2);
+		int ans = lld1.getRecursive(0);
+		assertEquals(1, ans);
+		ans = lld1.getRecursive(1);
+		assertEquals(2, ans);
+		lld1.addFirst(3);
+		ans = lld1.getRecursive(0);
+		assertEquals(3, ans);
+	}
 	/* Utility method for printing out empty checks. */
 	public static boolean checkEmpty(boolean expected, boolean actual) {
 		if (expected != actual) {
@@ -37,7 +80,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/isEmpty/Size test.");
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 		
-		ArrayDequeCopilot<String> lld1 = new ArrayDequeCopilot<String>();
+		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -67,7 +110,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/remove test.");
 
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
+		
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
@@ -81,12 +124,12 @@ public class LinkedListDequeTest {
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
-		*/
+		
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
-		// addRemoveTest();
+		addRemoveTest();
 	}
 } 
