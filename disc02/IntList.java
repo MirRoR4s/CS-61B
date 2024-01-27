@@ -42,17 +42,6 @@ public class IntList {
             return new IntList(L.item * L.item, null);
         }
         return new IntList(L.item * L.item, square(L.next));
-        // IntList head = new IntList(L.item * L.item, null);
-        // IntList q = head;
-        // IntList p = L.next;
-
-        // while (p != null) {
-        //     IntList tmp = new IntList(p.item * p.item, null);
-        //     q.next = tmp;
-        //     p = p.next;
-        //     q = q.next;
-        // }
-        // return head;
     }
 
     /**
