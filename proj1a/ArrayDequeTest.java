@@ -59,7 +59,6 @@ public class ArrayDequeTest {
         assertEquals(ad1.size(), 0);
         ad1.removeFirst();
         assertEquals(ad1.size(), 0);
-        
     }
 
 
