@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/mirror4srain/CS-61B/library-sp18/javalib/**/*.jar"
+    ],
+    // 隐藏 .idea out 文件夹
+    "files.exclude": {
+        "**/.idea": true,
+        "**/out": true,
+        "**/*.iml": true
+    }
+}
