@@ -9,9 +9,9 @@
  */
 public class ArrayDeque<T> {
     // 指向队首元素的位置
-    int front;
+    private int front;
     // 指向队尾元素的下一个位置
-    int back;
+    private int back;
     private T[] items;
     private int size;
 
@@ -46,7 +46,7 @@ public class ArrayDeque<T> {
         }
         front = (front -1 + items.length) % items.length;
         items[front] = item;
-        size++;
+        size += 1;
     }
 
     /**
@@ -109,11 +109,11 @@ public class ArrayDeque<T> {
      */
     public T removeLast() {
         // 最后一个元素的索引
-        int lastIndex = back - 1;
+        int lastIndex = (back - 1 + items.length) % items.length;
         T tmp = items[lastIndex];
         // 删除最后一个元素
         items[lastIndex] = null;
-        back = (lastIndex) % items.length;
+        back = lastIndex;
         size = size - 1;
         return tmp;
     }
