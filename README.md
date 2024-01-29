@@ -34,8 +34,22 @@
 - 2024年01月25日 15点30分 看完 2.5
 - 2024年01月26日 11点24分 完成项目1a
 - 2024年01月26日 13:45 完成3.1
-- 2024年01月29日 16:45:50 完成disc04
+- 2024年01月29日 16:45:50 完成disc03 例3
+- 2024年01月29日 22:50 完成disc04
 
 ## 学习路线
 
-直接跟着 reading 走即可。
+1. [reading1 1.1](https://joshhug.gitbooks.io/hug61b/content/chap1/chap11.html)
+2. hw 0
+3. lab 1b
+4. lab 1
+5. disc 2
+6. [reading 1.2](https://joshhug.gitbooks.io/hug61b/content/chap1/chap12.html)
+7. project 0
+8. disc 2
+9. [reading 2.1](https://joshhug.gitbooks.io/hug61b/content/chap2/chap21.html)
+10. [Lab setup](https://sp18.datastructur.es/materials/lab/lab2setup/lab2setup)
+11. [Lab 2](https://sp18.datastructur.es/materials/lab/lab2/lab2)
+12. [SLLists-2.2](https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html)
+13. [reading 4.1](https://joshhug.gitbooks.io/hug61b/content/chap4/chap41.html)
+14. [disc 04](https://sp18.datastructur.es/materials/discussion/disc04.pdf)
