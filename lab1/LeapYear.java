@@ -23,9 +23,6 @@ public class LeapYear {
      *  2. 能被4整除但不能被100整除
      */
     public static boolean isLeapYear(int year) {
-        if (year % 400 == 0) {
-            return true;
-        }
         return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
     }
 
