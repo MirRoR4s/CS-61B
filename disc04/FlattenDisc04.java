@@ -1,4 +1,4 @@
-public class Flatten {
+public class FlattenDisc04 {
     /**
      * 将二维数组x中的元素串联起来并返回
      * @param x 二维数组
@@ -7,10 +7,13 @@ public class Flatten {
     public static int[] flatten(int[][] x) {
         // 遍历二维数组求总长度
         int totalLength = 0;
+        // for (int i = 0; i < x.length; i++) {
+        //     for (int j = 0; j < x[i].length; j++) {
+        //         totalLength++;
+        //     }
+        // }
         for (int i = 0; i < x.length; i++) {
-            for (int j = 0; j < x[i].length; j++) {
-                totalLength++;
-            }
+            totalLength += x[i].length;
         }
         // 根据总长度定义新数组
         int[] a =  new int[totalLength];
