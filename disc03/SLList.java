@@ -64,6 +64,5 @@ public class SLList {
             p = tmp;
         }
         first = nHead;
-
     }
 }
