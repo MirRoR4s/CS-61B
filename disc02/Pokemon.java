@@ -14,7 +14,7 @@ public class Pokemon {
         Pokemon p = new Pokemon("Pikachu", 17);
         int level = 100;
         change(p, level);
-        //Pikachu 100
+        // Pikachu 100
         System.out.println("Name: " + p.name + ", Level: " + p.level);
     }
 
@@ -25,4 +25,3 @@ public class Pokemon {
         poke = new Pokemon("Gengar", 1);
     }
 }
-

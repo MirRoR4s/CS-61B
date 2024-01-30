@@ -33,9 +33,10 @@ public class IntList {
     }
 
     /**
-     * 将链表中所有元素平方后返回（非破坏性）
+     * 将旧链表中所有元素平方并以此返回一个新的链表（非破坏性）
+     * 
      * @param L 原链表
-     * @return  平方后的新链表
+     * @return 平方后的新链表
      */
     public static IntList square(IntList L) {
         if (L.next == null) {
@@ -45,9 +46,10 @@ public class IntList {
     }
 
     /**
-     * 将链表中所有元素平方后返回（破坏性）
+     * 将旧链表中每个元素平方然后返回（破坏性）
+     * 
      * @param L 原链表
-     * @return  平方后的新链表
+     * @return 平方后的新链表
      */
     public static IntList squareMutative(IntList L) {
         IntList p = L;
@@ -60,6 +62,7 @@ public class IntList {
 
     /**
      * 平方链表元素（破坏性-递归版）
+     * 
      * @param L
      * @return
      */
