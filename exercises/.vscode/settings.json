@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/mirror4srain/CS-61B/library-sp18/javalib/**/*.jar"
+    ],
+    "files.exclude": {
+        "**/.idea": true,
+        "**/out": true,
+        "**/*.iml": true
+    }
+}
