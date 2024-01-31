@@ -29,3 +29,7 @@
 ## 学习总结
 
 ### [Lab 3](https://sp18.datastructur.es/materials/lab/lab3/lab3)
+
+本实验学习了 Junit 单元测试的基本用法，包括 assertTrue、assertFalse、assertEquals、assertNotEquals 等几个常用测试方法。同时还编写了针对 IntList 数据结构的反转方法，以破坏性地方式反转了一个 IntList 链表。此外，还介绍了 61B 的样式检查器，能够帮我们检验代码样式是否合规。
+
+---
