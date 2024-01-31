@@ -23,3 +23,9 @@
 ## 学习计划
 
 预期两个月完成，从 24 年 1 月 18 日开始，预计 3 月 18 日结束。
+
+---
+
+## 学习总结
+
+### [Lab 3](https://sp18.datastructur.es/materials/lab/lab3/lab3)
