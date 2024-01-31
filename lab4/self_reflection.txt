@@ -12,11 +12,11 @@ A:
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: 
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: 
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
@@ -40,19 +40,19 @@ A:
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: get() 方法我利用 cnt + while 循环来遍历链表，更优雅的做法是利用 for 循环。
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
-A:
+A: printDeque() 不要调用 get()，而是边遍历边打印。
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: 一些 java 基础，比如内部类、类的定义等。
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 
-A:
+A: 判断中优先处理特殊情况
 
 -----
 
@@ -60,4 +60,4 @@ Meta:
 
 Q: Did you like this design review process? Anything we should do differently next time?
 
-A: 
+A: 暂时没有。
