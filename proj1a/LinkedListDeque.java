@@ -1,25 +1,7 @@
 /**
- * @see https://sp18.datastructur.es/materials/proj/proj1a/proj1a
- * @see https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html
- * @author Huang Jian Tao
+ * @author Jian Tao Huang
  */
-
 public class LinkedListDeque<T> {
-    /*
-     * 一个环型双端队列实现，以下简称 Deque。双端队列是一个大小可以动态变化的序列容器，可以在其两端插入和删除元素。
-     * 环形双端队列代表链表的最后一个元素的 next 指向哨兵节点，哨兵节点的 next 指向第一个元素，哨兵节点的 prev 指向最后一个元素。
-     * 一些注意事项：
-     * add 和 remove 操作不得涉及循环或递归，并且所花费的时间与队列的大小无关（这两类操作以常量时间进行）
-     * size 操作必须以常量时间进行
-     * get 必须使用迭代而非递归
-     * 程序在任意给定时间所占内存应和队列的大小成正比
-     * 不要保留已不在队列中的元素的引用
-     */
-    // 哨兵节点
-    private IntNode sentinel;
-    // 记录链表长度
-    private int size;
-
     private class IntNode {
         private IntNode prev;
         private IntNode next;
@@ -31,6 +13,10 @@ public class LinkedListDeque<T> {
             this.next = next;
         }
     }
+    // 哨兵节点
+    private IntNode sentinel;
+    // 记录链表长度
+    private int size;
 
     /**
      * 创建一个空的链表队列
@@ -40,13 +26,9 @@ public class LinkedListDeque<T> {
         // 当链表为空时，prev 和 next 都指向哨兵节点自身。
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
+        size = 0;
     }
 
-    /**
-     * 将 item 置于队首
-     * 
-     * @param item
-     */
     public void addFirst(T item) {
         // 创建节点，其 prev 指向哨兵，其 next 指向哨兵的 next
         IntNode p = new IntNode(item, sentinel, sentinel.next);
@@ -71,20 +53,10 @@ public class LinkedListDeque<T> {
         size++;
     }
 
-    /**
-     * 判断队列是否为空
-     * 
-     * @return 如果队列为空返回 true，否则返回 false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * 获取队列长度
-     * 
-     * @return 队列长度
-     */
     public int size() {
         return size;
     }
@@ -93,32 +65,25 @@ public class LinkedListDeque<T> {
      * 以空格作为分隔符从头至尾打印队列中的元素
      */
     public void printDeque() {
-        for (int i = 0; i < size; i++) {
-            if (i != 0) {
-                System.out.print(" ");
-            }
-            System.out.print(this.get(i));
+        IntNode p = sentinel.next;
+        while (p != sentinel) {
+            System.out.println(p.item + " ");
+            p = p.next;
         }
     }
 
-    /**
-     * 删除并返回队首元素
-     * 
-     * @return 队首元素，如果不存在返回 null
-     */
     public T removeFirst() {
-        if (size > 0) {
-            // 获取头节点
-            IntNode p = sentinel.next;
-            // 将哨兵指向头节点后一个节点
-            sentinel.next = p.next;
-            // 将第二个节点的 prev 改为哨兵
-            p.next.prev = sentinel;
-            // 长度减一
-            size--;
-            return p.item;
+        if (size == 0) {
+            return null;
         }
-        return null;
+        // 获取头节点
+        IntNode p = sentinel.next;
+        // 将哨兵指向头节点后一个节点
+        sentinel.next = p.next;
+        // 将第二个节点的 prev 改为哨兵
+        p.next.prev = sentinel;
+        size--;
+        return p.item;
     }
 
     /**
@@ -127,16 +92,16 @@ public class LinkedListDeque<T> {
      * @return 队尾元素，如果不存在返回 null
      */
     public T removeLast() {
-        if (size > 0) {
-            T ans = sentinel.prev.item;
-            // 将哨兵指向倒数第二个节点
-            sentinel.prev = sentinel.prev.prev;
-            // 将倒数第二个节点的 next 改为哨兵
-            sentinel.prev.next = sentinel;
-            size--;
-            return ans;
+        if (size == 0) {
+            return null;
         }
-        return null;
+        T ans = sentinel.prev.item;
+        // 将哨兵指向倒数第二个节点
+        sentinel.prev = sentinel.prev.prev;
+        // 将倒数第二个节点的 next 改为哨兵
+        sentinel.prev.next = sentinel;
+        size--;
+        return ans;
     }
 
     /**
@@ -146,17 +111,15 @@ public class LinkedListDeque<T> {
      * @return 队列第 index 个元素，如果不存在则返回 null
      */
     public T get(int index) {
-        // 不得修改队列
-        IntNode p = sentinel;
-        int cnt = 0;
-        while (p.next != null && cnt <= size) {
-            if (cnt == index) {
-                return p.next.item;
-            }
-            p = p.next;
-            cnt++;
+        if (index >= size) {
+            return null;
         }
-        return null;
+        // 不得修改队列
+        IntNode p = sentinel.next;
+        for (int i = 0; i < index; i++) {
+            p = p.next;
+        }
+        return p.item;
     }
 
     /**
@@ -166,7 +129,9 @@ public class LinkedListDeque<T> {
      * @return
      */
     public T getRecursive(int index) {
-
+        if (index >= size) {
+            return null;
+        }
         return getRecursive(sentinel.next, index);
     }
 
