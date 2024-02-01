@@ -36,9 +36,21 @@
 
 在数组双端队列中，我维护了两个整数 front 和 backNext。front 始终代表队首元素在数组中的索引，backNext 始终代表队尾元素在数组中的索引。在进行入队操作时，根据队列长度是否已达到数组的长度来动态地调整数组的大小，这也能够确保 front 和 backNext 不会冲突。
 
+---
+
+### [proj1b](https://sp18.datastructur.es/materials/proj/proj1b/proj1b)
+
+本项目定义了一个双端队列接口 Deque，并用 proj1a 的数组队列和链表队列实现了该接口。此外，还编写了一个根据字符串构建队列的方法以及一个判断字符串是否回文的方法，并在编写这两个方法的实现之前先编写了对应的 Junit Test，这体现了测试驱动开发的思想。
+
+有趣的是，判断回文方法利用到了 Deque 数据结构，而非常规的做法。具体地说，我首先将字符串转为对应的队列，然后编写了一个辅助方法判断队列是否回文。辅助方法的原理是同时在队列首尾出队，判断两个元素是否相等（长度为 0、1 时直接返回 true）。
+
+之后还定义了一个 CharacterComparator 即字符比较器接口，然后用 OffByOne 和 OffByN 两个类实现了该接口的 `equalchars()` 方法，主要就是用不同的规则比较两个字符是否相等，本项目中采用的规则就是两字符的 ascii 码值差。
+
+---
+
 ### [Lab 3](https://sp18.datastructur.es/materials/lab/lab3/lab3)
 
-本实验学习了 Junit 单元测试的基本用法，包括 assertTrue、assertFalse、assertEquals、assertNotEquals 等几个常用测试方法。同时还编写了针对 IntList 数据结构的反转方法 `reverse(IntList x)`，以破坏性地方式反转了一个 IntList 链表。此外，还介绍了 61B 的样式检查器，能够帮我们检验代码样式是否合规。
+本实验巩固了 Junit 单元测试的基本用法，包括 assertTrue、assertFalse、assertEquals、assertNotEquals 等几个常用测试方法。同时还编写了针对 IntList 数据结构的反转方法 `reverse(IntList x)`，以破坏性地方式反转了一个 IntList 链表。此外，还介绍了 61B 的样式检查器，能够帮我们检验代码样式是否合规。
 
 ---
 
