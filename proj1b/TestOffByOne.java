@@ -20,7 +20,7 @@ public class TestOffByOne {
         assertFalse(offByOne.equalChars('a', 'A'));
         assertTrue(offByOne.equalChars(' ', '!'));
         assertTrue(offByOne.equalChars('A', 'B'));
-        assertTrue(offByOne.equalChars((char)0, (char)1));
+        assertTrue(offByOne.equalChars((char) 0, (char) 1));
     }
 }
 
