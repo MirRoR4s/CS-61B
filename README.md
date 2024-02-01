@@ -57,3 +57,13 @@
 ### [proj1gold](https://sp18.datastructur.es/materials/proj/proj1gold/proj1gold)
 
 本项目编写了一个针对 proj1 `ArrayDeque` 的自动评分器。具体的工作原理是随机地调用正确实现和提交者的实现，并根据输出结果是否不同来判断提交者的实现是否正确。编写的自动评分器有价值的一点在于当发现提交者的实现不正确时，会将已调用的操作序列一并输出，这可以给予提交者一些有用的信息。
+
+### lectures
+
+#### [lec13](https://sp18.datastructur.es/materials/lectures/lec13/lec13)
+
+本次讲座的练习一以数组作为核心数据结构实现了带泛型 的 `ArrayMap` 类，有 `get(key)`、`put(key, value)` 等常见方法。
+
+在实现中，需要定义两个泛型数组 Keys 和 Values，问题的关键在于需要在 Keys 和 Values 之间建立映射关系。在实现中我们指定某个 Key 在 Keys 中的索引等于其对应的 Value 在 Values 中的索引，通过这种方式，我们就可以获取到 Key 对应的 Value。
+
+之后是一些针对 final 的练习，要注意用 final 关键字声明的变量只能够被赋值一次，第二次赋值会导致编译不通过。
