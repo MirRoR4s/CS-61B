@@ -10,7 +10,7 @@ import java.util.Map;
 public class Frequency {
     /**
      * 计算文章中出现的单词频率
-     * @param words 单词列表
+     * @param article 文章
      * @return 以单词为key，其出现频率为value的Map
      */
     public static Map<String, Double> calcWordFrequency(String article) {
