@@ -100,13 +100,58 @@
 
 ### [Lab 5](https://sp18.datastructur.es/materials/lab/lab5/lab5)
 
-编写一个 `addHexagon()` 方法实现在世界的指定位置绘制指定大小的六边形。public static void addHexagon(TETile[][] world, Position p, int s, TETile t)
+编写方法实现六边形的绘制，该实验并未涉及到数据结构和算法，是对项目 2 即将用到的 API 进行的实践练习。从该实验我得到的启示是很多时候看起来困难的问题或许并不困难，只是我们需要从另一个角度出来看待面临的问题。此外，像这种绘制图形的程序，“看不见并不代表不存在”，看不见的部分或许仅是用黑色进行了填充，但并不代表此处没有东西。
 
-- 六边形顶部和尾部对应着边长
+`addHexagon()` 方法用于在世界中绘制一个六边形，该问题需要弄清楚六边形的边长和其所占的总行数、当前行数的边长之间的关系。
 
-- 六边形的总行数是边长的两倍
+### [HW 1](https://sp18.datastructur.es/materials/hw/hw1/hw1)
 
-- 最宽的部分由两行等长的行组成，长度 = side + (2 * (side - 1))
+#### Task 1
 
-- 从最下角开始绘制六边形，每一个步骤只需确定起点和长度即可。当前起点坐标是 (x, y)，那么下一个起点的坐标（直到到达最宽的部分）为 (x - 1, y + 1)。一旦到达最宽的部分，保持起点的坐标不变，以相同长度在绘制一次。之后起点的坐标改为（直到到达顶部）(x + 1, y + 1)。
+定义 `BoundedQueue` 接口，仅能在队尾入队，队首出队；若队列已满则不允许任何元素入队。
+
+---
+
+#### Task 2
+
+定义 `AbstractBoundedQueue` 抽象类，实现 `BoundedQueue` 接口，能够做到获取队列容量、队列长度、出队、入队、获取队首元素等。
+
+---
+
+#### Task 3
+
+扩展 `AbstractBoundedQueue`实现环形数组队列 `ArrayRingBuffer`，具备上述所说的功能。
+
+实现思路：
+
+- `first` 存储队首元素索引，`last` 存储队尾元素索引的**下一个**索引。（指向即将插入的元素）
+
+- 入队时，应在 `last` 索引处入队，然后将 `last` 加 1 ；当出队时，将 `first` 索引处的元素取出，并将 `first` 减 1。
+
+- 对于 `last` 和 `first` 的增减操作都要对数组的长度取余。（环形数组逻辑定义）
+
+- 当队列为空调用出队方法或是队列满员调用入队方法时 抛出 `run-time` 异常。
+
+---
+
+#### Task 4: GuitarString
+
+利用 `ArrayRingBuffer` 存储拨弦音对应的数据，最终的效果应是模拟出弹吉他的声音。
+
+作业实用 `Karplus` 算法模拟弦乐器的声音，该算法如下：
+
+1. 用随机的噪音（介于 -0.5 到 0.5 之间的 double）替换 `BoundedQueue` 中的每个 item。
+2. 移除 `BoundedQueue` 的队首元素，并将其和当前队首元素相加再除以 2，最后乘以 0.996。
+3. `播放`上一步出队的队首元素，并将上一步计算的结果加入队列中
+4. 返回第 2 步继续执行
+
+> Karplus-Strong 算法是一种物理建模合成的方法，主要用于模拟弦乐器的声音，如吉他和钢琴。它是由 Kevin Karplus 和 Alex Strong 在 1983 年提出的。
+
+---
+
+#### Task 5: Iteration and Exceptions
+
+增加迭代 `BoundedQueue` 的功能，并确保能在输入无效时抛出异常。
+
+> 关于如何为一个自定义类增加迭代功能，参看[此处](https://docs.google.com/presentation/d/1LIz15B3VmMMhllz1t5HNo9gkOPTGgmAynHNEt6Rzng0/edit#slide=id.g11a6f75162_0_250)
 
