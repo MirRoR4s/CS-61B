@@ -69,7 +69,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         }
         T result = rb[first];
         // rb[first] = null;
-        first = (first + capacity - 1) % capacity;
+        first = (first + 1) % capacity;
         fillCount = fillCount - 1;
         return result;
     }

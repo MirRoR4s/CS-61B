@@ -1,10 +1,6 @@
 package synthesizer;
-
 import edu.princeton.cs.algs4.In;
 import org.junit.Test;
-
-import javax.management.RuntimeErrorException;
-
 import static org.junit.Assert.*;
 
 /** Tests the ArrayRingBuffer class.
@@ -45,6 +41,28 @@ public class TestArrayRingBuffer {
         for (int i: arrayRingBuffer) {
             System.out.println(i);
         }
+    }
+
+    @Test
+    public void testSizeDequeue() {
+        ArrayRingBuffer<Integer> arrayRingBuffer = new ArrayRingBuffer<>(3);
+        arrayRingBuffer.enqueue(1);
+        assertEquals(1, arrayRingBuffer.fillCount());
+        arrayRingBuffer.enqueue(2);
+        assertEquals(2, arrayRingBuffer.fillCount());
+        arrayRingBuffer.enqueue(3);
+        assertEquals(3, arrayRingBuffer.fillCount());
+
+        arrayRingBuffer.dequeue();
+        assertEquals(2, arrayRingBuffer.fillCount());
+        arrayRingBuffer.enqueue(1);
+        assertEquals(3, arrayRingBuffer.fillCount());
+
+        arrayRingBuffer.dequeue();
+        assertEquals(2, arrayRingBuffer.fillCount());
+        arrayRingBuffer.dequeue();
+        assertEquals(1, arrayRingBuffer.fillCount());
+        arrayRingBuffer.dequeue();
     }
 
     /** Calls tests for ArrayRingBuffer. */
