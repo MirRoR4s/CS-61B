@@ -164,10 +164,9 @@
 
 #### Task 5: Iteration and Exceptions
 
-增加迭代 `BoundedQueue` 的功能，并确保能在输入无效时抛出异常。
+增加迭代 `BoundedQueue` 的功能，并确保在输入无效时抛出异常。
 
 > 关于如何为一个自定义类增加迭代功能，参看[此处](https://docs.google.com/presentation/d/1LIz15B3VmMMhllz1t5HNo9gkOPTGgmAynHNEt6Rzng0/edit#slide=id.g11a6f75162_0_250)
-
 
 ---
 
