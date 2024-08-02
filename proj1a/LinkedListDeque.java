@@ -1,6 +1,6 @@
 /**
  * @author Jian Tao Huang
- */
+*/
 public class LinkedListDeque<T> {
     private class IntNode {
         private IntNode prev;
@@ -13,7 +13,11 @@ public class LinkedListDeque<T> {
             this.next = next;
         }
     }
-    // 哨兵节点
+
+    /*
+     * 哨兵节点 sentinel
+     * 哨兵节点的下一个节点始终指向队列的第一个节点
+     */
     private IntNode sentinel;
     // 记录链表长度
     private int size;
