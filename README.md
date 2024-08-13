@@ -17,15 +17,15 @@
 
 ## 环境搭建
 
-参见 [lab2setup](https://sp18.datastructur.es/materials/lab/lab2setup/lab2setup)
-
-> 注意冲突问题
+新建 git 仓库，然后从 [61b](https://sp18.datastructur.es/materials/lab/lab2setup/lab2setup) 拉取代码。
 
 ---
 
 ## 学习总结
 
-### proj1a
+### project
+
+#### proj1a
 
 基于数组和链表实现双端队列，具备常数时间的首尾出入队、获取长度等功能。
 
@@ -35,7 +35,7 @@
 
 ---
 
-### [proj1b](https://sp18.datastructur.es/materials/proj/proj1b/proj1b)
+#### [proj1b](https://sp18.datastructur.es/materials/proj/proj1b/proj1b)
 
 本项目定义了一个双端队列接口 `Deque`，并用 proj1a 的数组队列和链表队列实现了该接口。此外，还编写了一个根据字符串构建队列的方法以及一个判断字符串是否回文的方法，并在编写这两个方法的实现之前先编写了对应的 Junit Test，这体现了测试驱动开发的思想。
 
@@ -45,15 +45,51 @@
 
 ---
 
-### [Lab 3](https://sp18.datastructur.es/materials/lab/lab3/lab3)
+#### [proj1gold](https://sp18.datastructur.es/materials/proj/proj1gold/proj1gold)
+
+本项目编写了一个针对 proj1 `ArrayDeque` 的自动评分器。具体的工作原理是随机调用正确实现和提交者的实现，并比较两者的输出结果来判断提交者的实现是否正确。编写的自动评分器需要在提交者的实现不正确时，将已调用的操作序列反馈给提交者，这可以给予他们一些有用的信息。
+
+---
+
+#### [proj 2, Phase 1](https://sp18.datastructur.es/materials/proj/proj2/proj2)
+
+本项目旨在利用瓦片制作一个二维网格世界，玩家可与世界进行互动。
+
+二维瓦片世界的生成算法参见[此处](https://gamedev.stackexchange.com/questions/82059/algorithm-for-procedural-2d-map-with-connected-paths)
+
+- 阶段一要求生成一个基于瓦片的世界，但是我并不知道该怎样做。
+
+- 使用 tile 引擎绘制 2d 世界
+- 世界必须是伪随机生成的
+- 生成的世界必须包括房间和走廊，也可以包括室外的空间
+- 房间形状不固定，但至少必须有部分房间是矩形
+- 世界必须包含转弯的走廊
+- 世界应包含随机数量的房间和走廊
+- 房间的宽度和高度应是随机的
+- 走廊的长度应是随机的
+- 房间和走廊的墙壁必须在视觉上和地面区分开来，墙壁和地面应在视觉上和闲置空间区分开来
+- 房间和走廊应相互连接，即相邻房间或走廊之间的地板不应有缝隙
+- 生成的世界每次都应不一样
+- \# 代表墙壁，. 代表地板，金色墙段代表上锁的门
+
+---
+
+### Lab
+
+#### [Lab 3](https://sp18.datastructur.es/materials/lab/lab3/lab3)
 
 本实验巩固了 Junit 单元测试的基本用法，包括 `assertTrue`、`assertFalse`、`assertEquals`、`assertNotEquals` 等几个常用测试方法。同时还编写了针对 IntList 数据结构的反转方法 `reverse(IntList x)`，以破坏性地方式反转 IntList 链表。此外，还介绍了 61B 的样式检查器，能够帮我们检验代码样式是否合规。
 
 ---
 
-### [proj1gold](https://sp18.datastructur.es/materials/proj/proj1gold/proj1gold)
+### [Lab 5](https://sp18.datastructur.es/materials/lab/lab5/lab5)
 
-本项目编写了一个针对 proj1 `ArrayDeque` 的自动评分器。具体的工作原理是随机调用正确实现和提交者的实现，并比较两者的输出结果来判断提交者的实现是否正确。编写的自动评分器需要在提交者的实现不正确时，将已调用的操作序列反馈给提交者，这可以给予他们一些有用的信息。
+编写方法实现六边形的绘制，该实验并未涉及到数据结构和算法，是对项目 2 即将用到的 API 进行的实践练习。
+
+> 像这种绘制图形的程序，“看不见并不代表不存在”，看不见的部分或许仅是用黑色进行了填充，但并不代表此处没有东西。
+
+`addHexagon()` 方法用于在世界中绘制一个六边形，解决问题的关键在于需要弄清楚六边形的边长和其所占的总行数、当前行数的边长之间的关系。
+
 
 ---
 
@@ -97,15 +133,7 @@
 
 - 使用 `Stack` 来定义一个 `Queue` 类，实现 ADT 中的 `push()` 和 `poll()` 方法。由于栈是后进先出的，所以用栈实现队列的话，队首元素在栈底。`poll()` 时为了获取队首即栈底，我们可以用一个辅助栈来保存栈底元素之上的所有元素，在弹出栈底元素后再将这些元素放回来。
 
-### [Lab 5](https://sp18.datastructur.es/materials/lab/lab5/lab5)
 
-编写方法实现六边形的绘制，该实验并未涉及到数据结构和算法，是对项目 2 即将用到的 API 进行的实践练习。
-
-> 像这种绘制图形的程序，“看不见并不代表不存在”，看不见的部分或许仅是用黑色进行了填充，但并不代表此处没有东西。
-
-`addHexagon()` 方法用于在世界中绘制一个六边形，解决问题的关键在于需要弄清楚六边形的边长和其所占的总行数、当前行数的边长之间的关系。
-
----
 
 ### [HW 1](https://sp18.datastructur.es/materials/hw/hw1/hw1)
 
@@ -160,23 +188,3 @@
 
 ---
 
-### [proj 2: CS61BYoG](https://sp18.datastructur.es/materials/proj/proj2/proj2)
-
-本项目旨在利用瓦片制作一个二维网格世界，玩家可与世界进行互动。
-
-#### Phase 1: World Generation
-
-- 阶段一要求生成一个基于瓦片的世界，但是我并不知道该怎样做。
-
-- 使用 tile 引擎绘制 2d 世界
-- 世界必须是伪随机生成的
-- 生成的世界必须包括房间和走廊，也可以包括室外的空间
-- 房间形状不固定，但至少必须有部分房间是矩形
-- 世界必须包含转弯的走廊
-- 世界应包含随机数量的房间和走廊
-- 房间的宽度和高度应是随机的
-- 走廊的长度应是随机的
-- 房间和走廊的墙壁必须在视觉上和地面区分开来，墙壁和地面应在视觉上和闲置空间区分开来
-- 房间和走廊应相互连接，即相邻房间或走廊之间的地板不应有缝隙
-- 生成的世界每次都应不一样
-- \# 代表墙壁，. 代表地板，金色墙段代表上锁的门
