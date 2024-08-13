@@ -17,7 +17,8 @@
 
 ## 环境搭建
 
-新建 git 仓库，然后从 61b 拉取代码。
+参见 [lab2setup](https://sp18.datastructur.es/materials/lab/lab2setup/lab2setup)
+
 > 注意冲突问题
 
 ---
