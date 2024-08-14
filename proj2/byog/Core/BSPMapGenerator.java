@@ -8,8 +8,9 @@ import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
+
 class Rectangle {
-    int x, y, width, height;
+    int x, y, width, height; // 矩形区域左下角坐标以及宽度和高度
 
     public Rectangle(int x, int y, int width, int height) {
         this.x = x;
@@ -39,36 +40,26 @@ class Node {
 public class BSPMapGenerator {
     private static final int MIN_ROOM_SIZE = 5; // 最小房间大小
     private static final int MAX_ROOM_SIZE = 15; // 最大房间大小
-    private static final Random random = new Random();
+    private Random random;
+    private Node node;
 
-    public static void main(String[] args) {
-        int WIDTH = 50;
-        int HEIGHT = 50;
-        Rectangle rootRoom = new Rectangle(0, 0, WIDTH, HEIGHT); // 根节点的初始大房间
-        Node rootNode = new Node(rootRoom);
-
-        split(rootNode, MIN_ROOM_SIZE);
-
-        List<Rectangle> rooms = new ArrayList<>();
-        collectRooms(rootNode, rooms);
-        TERenderer ter = new TERenderer();
-        ter.initialize(80, 30);
-        TETile[][] world = new TETile[WIDTH][HEIGHT];
-        for (int x = 0; x < WIDTH; x += 1) {
-            for (int y = 0; y < HEIGHT; y += 1) {
-                world[x][y] = Tileset.NOTHING;
-            }
-        }
-        printMap(rootRoom.width, rootRoom.height, rooms, world);
-        ter.renderFrame(world);
+    public BSPMapGenerator(Node node, long seed) {
+        this.node = node;
+        this.random = new Random(seed);
     }
-
-    private static void split(Node node, int minSize) {
+    
+    public void split(int minSize) {
+        split(node, minSize);
+    }
+    /**
+     * 分割
+     */
+    private void split(Node node, int minSize) {
         if (!node.room.splitable(minSize)) {
             return;
         }
-
-        boolean splitHorizontal = random.nextBoolean();
+        // 默认情况下随机决定水平分割还是垂直分割
+        boolean splitHorizontal = RandomUtils.bernoulli(random);
 
         if (node.room.width > node.room.height && node.room.width / node.room.height >= 1.25) {
             splitHorizontal = false;
@@ -81,10 +72,11 @@ public class BSPMapGenerator {
             return;
         }
 
-        int split = random.nextInt(max - minSize + 1) + minSize;
+        // int split = random.nextInt(max - minSize + 1) + minSize;
+        int split = RandomUtils.uniform(random, max - minSize + 1) + minSize;
 
         Rectangle leftRoom, rightRoom;
-        if (splitHorizontal) {
+        if (splitHorizontal) { // 水平分割
             leftRoom = new Rectangle(node.room.x, node.room.y, node.room.width, split);
             rightRoom = new Rectangle(node.room.x, node.room.y + split, node.room.width, node.room.height - split);
         } else {
@@ -99,7 +91,7 @@ public class BSPMapGenerator {
         split(node.right, minSize);
     }
 
-    private static void collectRooms(Node node, List<Rectangle> rooms) {
+    public void collectRooms(Node node, List<Rectangle> rooms) {
         if (node.isLeaf()) {
             int roomWidth = random.nextInt(Math.max(1, node.room.width - MIN_ROOM_SIZE + 1)) + MIN_ROOM_SIZE;
             int roomHeight = random.nextInt(Math.max(1, node.room.height - MIN_ROOM_SIZE + 1)) + MIN_ROOM_SIZE;
@@ -116,13 +108,7 @@ public class BSPMapGenerator {
         }
     }
 
-    private static void printMap(int width, int height, List<Rectangle> rooms, TETile[][] map) {
-
-        // for (int i = 0; i < height; i++) {
-        // for (int j = 0; j < width; j++) {
-        // map[i][j] = ' ';
-        // }
-        // }
+    private void printMap(int width, int height, List<Rectangle> rooms, TETile[][] map) {
 
         for (Rectangle room : rooms) {
             for (int i = room.y; i < room.y + room.height; i++) {
@@ -131,12 +117,32 @@ public class BSPMapGenerator {
                 }
             }
         }
+    }
 
-        // for (int i = 0; i < height; i++) {
-        // for (int j = 0; j < width; j++) {
-        // System.out.print(map[i][j]);
-        // }
-        // System.out.println();
-        // }
+    public static void main(String[] args) {
+        int width = 80; // 世界的宽度
+        int height = 50; // 世界的高度
+        // 初始化渲染引擎
+        TERenderer ter = new TERenderer();
+        ter.initialize(width, height);
+        // 初始化世界
+        TETile[][] world = new TETile[width][height];
+        for (int x = 0; x < width; x += 1) {
+            for (int y = 0; y < height; y += 1) {
+                world[x][y] = Tileset.NOTHING;
+            }
+        }
+        
+        BSPMapGenerator bspMapGenerator = new BSPMapGenerator(123456);
+
+        Rectangle rootRoom = new Rectangle(0, 0, width, height); // 根节点的初始大房间
+        Node rootNode = new Node(rootRoom);
+
+        bspMapGenerator.split(rootNode, MIN_ROOM_SIZE);
+
+        List<Rectangle> rooms = new ArrayList<>();
+        collectRooms(rootNode, rooms);
+        printMap(rootRoom.width, rootRoom.height, rooms, world);
+        ter.renderFrame(world);
     }
 }
