@@ -47,27 +47,25 @@ class Node {
 public class BSPMapGenerator {
     private static final int MIN_ROOM_SIZE = 5;
     private static final int MAX_ROOM_SIZE = 15;
-    private static final Random random = new Random();
+    private Random random;
+    private Node node;
+    List<Rectangle> rooms;
+    List<int[]> corridors;
 
-    public static void main(String[] args) {
-        Rectangle rootRoom = new Rectangle(0, 0, 50, 50);
-        Node rootNode = new Node(rootRoom);
-
-        split(rootNode, MIN_ROOM_SIZE);
-
-        List<Rectangle> rooms = new ArrayList<>();
-        collectRooms(rootNode, rooms);
-
-        List<int[]> corridors = new ArrayList<>();
-        createCorridors(rootNode, corridors);
-        TERenderer ter = new TERenderer();
-        ter.initialize(50, 50);
-        TETile[][] map = new TETile[50][50];
-        printMap(rootRoom.width, rootRoom.height, rooms, corridors, map);
-        ter.renderFrame(map);
+    public BSPMapGenerator(Node node, long seed) {
+        this.node = node;
+        this.random = new Random(seed);
+        rooms = new ArrayList<>();
+        corridors = new ArrayList<>();
     }
 
-    private static void split(Node node, int minSize) {
+    public void split(int minSize) {
+        split(node, minSize);
+        collectRooms(node);
+        createCorridors(node);
+    }
+
+    private void split(Node node, int minSize) {
         if (!node.room.splitable(minSize)) {
             return;
         }
@@ -103,7 +101,7 @@ public class BSPMapGenerator {
         split(node.right, minSize);
     }
 
-    private static void collectRooms(Node node, List<Rectangle> rooms) {
+    private void collectRooms(Node node) {
         if (node.isLeaf()) {
             int roomWidth = random.nextInt(Math.max(1, node.room.width - MIN_ROOM_SIZE + 1)) + MIN_ROOM_SIZE;
             int roomHeight = random.nextInt(Math.max(1, node.room.height - MIN_ROOM_SIZE + 1)) + MIN_ROOM_SIZE;
@@ -113,12 +111,12 @@ public class BSPMapGenerator {
 
             rooms.add(new Rectangle(roomX, roomY, roomWidth, roomHeight));
         } else {
-            if (node.left != null) collectRooms(node.left, rooms);
-            if (node.right != null) collectRooms(node.right, rooms);
+            if (node.left != null) collectRooms(node.left);
+            if (node.right != null) collectRooms(node.right);
         }
     }
 
-    private static void createCorridors(Node node, List<int[]> corridors) {
+    private void createCorridors(Node node) {
         if (node.left != null && node.right != null) {
             int[] leftCenter = {node.left.room.centerX(), node.left.room.centerY()};
             int[] rightCenter = {node.right.room.centerX(), node.right.room.centerY()};
@@ -131,31 +129,22 @@ public class BSPMapGenerator {
                 corridors.add(new int[]{leftCenter[0], rightCenter[1], rightCenter[0], rightCenter[1]});
             }
 
-            createCorridors(node.left, corridors);
-            createCorridors(node.right, corridors);
+            createCorridors(node.left);
+            createCorridors(node.right);
         }
     }
 
-    private static void printMap(int width, int height, List<Rectangle> rooms, List<int[]> corridors, TETile[][] map) {
-        // char[][] map = new char[height][width];
-
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                map[i][j] = Tileset.NOTHING;
-            }
-        }
-
+    public void drawRoom(TETile[][] map) {
         for (Rectangle room : rooms) {
-            for (int i = room.y; i < room.y + room.height; i++) {
-                for (int j = room.x; j < room.x + room.width; j++) {
-                    map[i][j] = Tileset.FLOOR;
-                }
-            }
-            // 墙壁
-            for (int i = room.y - 1; i <= room.y + room.height; i++) {
-                for (int j = room.x - 1; j <= room.x + room.width; j++) {
-                    if (i >= 0 && i < height && j >= 0 && j < width && map[i][j] != Tileset.FLOOR) {
+            int width = room.x + room.width;
+            int height = room.y + room.height;
+
+            for (int i = room.x; i < width; i++) {
+                for (int j = room.y; j < height; j++) {
+                    if (i == room.x || i == width - 1 || j == room.y || j == height - 1) {
                         map[i][j] = Tileset.WALL;
+                    } else {
+                        map[i][j] = Tileset.FLOOR;
                     }
                 }
             }
@@ -165,29 +154,41 @@ public class BSPMapGenerator {
             int x1 = corridor[0], y1 = corridor[1], x2 = corridor[2], y2 = corridor[3];
             if (x1 == x2) {
                 for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
-                    map[y][x1] = Tileset.FLOOR;
+                    map[x1][y] = Tileset.FLOOR;
+                    if (map[x1 - 1][y] == Tileset.NOTHING) map[x1 - 1][y] = Tileset.WALL;
+                    if (map[x1 + 1][y] == Tileset.NOTHING) map[x1 + 1][y] = Tileset.WALL;
                 }
             } else {
                 for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
-                    map[y1][x] = Tileset.FLOOR;
-                }
-            }
-            // 走廊墙壁
-            for (int y = Math.min(y1, y2) - 1; y <= Math.max(y1, y2) + 1; y++) {
-                for (int x = Math.min(x1, x2) - 1; x <= Math.max(x1, x2) + 1; x++) {
-                    if (y >= 0 && y < height && x >= 0 && x < width && map[y][x] == Tileset.NOTHING) {
-                        map[y][x] = Tileset.WALL;
-                    }
+                    map[x][y1] = Tileset.FLOOR;
+                    if (map[x][y1 - 1] == Tileset.NOTHING) map[x][y1 - 1] = Tileset.WALL;
+                    if (map[x][y1 + 1] == Tileset.NOTHING) map[x][y1 + 1] = Tileset.WALL;
                 }
             }
         }
+    }
 
-        // for (int i = 0; i < height; i++) {
-        //     for (int j = 0; j < width; j++) {
-        //         System.out.print(map[i][j]);
-        //     }
-        //     System.out.println();
-        // }
+    public static void main(String[] args) {
+        int width = 50;
+        int height = 50;
+        TERenderer ter = new TERenderer();
+        ter.initialize(width, height);
+
+        TETile[][] world = new TETile[width][height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                world[x][y] = Tileset.NOTHING;
+            }
+        }
+
+        Rectangle rootRoom = new Rectangle(0, 0, width, height);
+        Node rootNode = new Node(rootRoom);
+        BSPMapGenerator bspMapGenerator = new BSPMapGenerator(rootNode, 123456);
+        int minRoomSize = 5;
+
+        bspMapGenerator.split(minRoomSize);
+        bspMapGenerator.drawRoom(world);
+
+        ter.renderFrame(world);
     }
 }
-
