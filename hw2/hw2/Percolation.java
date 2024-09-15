@@ -169,8 +169,8 @@ public class Percolation {
         int n = 5;
         Percolation percolation = new Percolation(n);
         while (!percolation.percolates()) {
-            int row = StdRandom.uniformInt(n);
-            int col = StdRandom.uniformInt(n);
+            int row = StdRandom.uniform(n);
+            int col = StdRandom.uniform(n);
             percolation.open(row, col);
         }
     }
