@@ -88,8 +88,8 @@ public class Percolation {
             return false;
         }
         int p = convert(row, col);
-        return weightedQuickUnionUFFullSite.find(p) ==
-        weightedQuickUnionUFFullSite.find(N * N);
+        return weightedQuickUnionUFFullSite.find(p) 
+        == weightedQuickUnionUFFullSite.find(N * N);
     }
 
     /**
@@ -146,7 +146,7 @@ public class Percolation {
             }
             if (isOpen(newRow, newCol)) {
                 weightedQuickUnionUF.union(p, convert(newRow, newCol));
-                
+
                 weightedQuickUnionUFFullSite.union(p, convert(newRow, newCol));
             }
         }
@@ -164,13 +164,13 @@ public class Percolation {
     }
 
     // test client (optional)
-    public static void main(String[] args) {
-        int n = 5;
-        Percolation percolation = new Percolation(n);
-        while (!percolation.percolates()) {
-            int row = StdRandom.uniform(n);
-            int col = StdRandom.uniform(n);
-            percolation.open(row, col);
-        }
-    }
+    // public static void main(String[] args) {
+    //     int n = 5;
+    //     Percolation percolation = new Percolation(n);
+    //     while (!percolation.percolates()) {
+    //         int row = StdRandom.uniform(n);
+    //         int col = StdRandom.uniform(n);
+    //         percolation.open(row, col);
+    //     }
+    // }
 }
