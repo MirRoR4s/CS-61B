@@ -7,7 +7,7 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author JianTaoHuang
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
@@ -43,7 +43,6 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         if (key == null) {
             return 0;
         }
-
         int numBuckets = buckets.length;
         return Math.floorMod(key.hashCode(), numBuckets);
     }
@@ -53,19 +52,41 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        ArrayMap<K, V> bucket = buckets[hash(key)];
+        return bucket.get(key);
+//        throw new UnsupportedOperationException();
     }
 
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (loadFactor() > MAX_LF) {
+            resize(buckets.length * 2);
+        }
+        ArrayMap<K, V> bucket = buckets[hash(key)];
+        if (bucket.get(key) == null) {
+            size++;  // 注意不能够在put之后直接递增size，因为如果key已存在，则只会更新value。
+        }
+        bucket.put(key, value);
     }
 
+    private void resize(int newSize) {
+        ArrayMap<K, V>[] tmp = buckets;
+        buckets = new ArrayMap[newSize];
+        for (int i = 0; i < tmp.length; i++) {
+            ArrayMap<K, V> tmp1 = tmp[i];
+            buckets[i] = tmp1;
+        }
+        for (int i = tmp.length; i < buckets.length; i++) {
+            buckets[i] = new ArrayMap<>();
+        }
+
+    }
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
+//        throw new UnsupportedOperationException();
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
