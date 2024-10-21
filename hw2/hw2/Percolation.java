@@ -8,10 +8,10 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  */
 public class Percolation {
     // squre grid weight and height.
-    private final int gridSize;
+    private final int N;
     private final boolean[][] sites;
     private WeightedQuickUnionUF weightedQuickUnionUF;
-    private WeightedQuickUnionUF weightedQuickUnionUFFullSite;
+    private WeightedQuickUnionUF weightedQuickUnionUFFullSite; // 为了 isFull 的正确性所需
     private int openSiteNum = 0;
     private final int[] dx = { -1, 0, 0, 1 };
     private final int[] dy = { 0, -1, 1, 0 };
@@ -26,9 +26,8 @@ public class Percolation {
         if (N <= 0) {
             throw new IllegalArgumentException("gridSize 不能小于等于 0");
         }
-        this.gridSize = N;
-        sites = new boolean[gridSize][gridSize];
-
+        this.N = N;
+        sites = new boolean[N][N];
         // 除了 N * N 个网格节点外，顶部和底部分别各有一个虚拟节点，
         // 索引分别是 N * N 和 N * N + 1 (index start from 0!)
         weightedQuickUnionUF = new WeightedQuickUnionUF(N * N + 2);
@@ -88,11 +87,9 @@ public class Percolation {
         if (!isOpen(row, col)) {
             return false;
         }
-        // int p = (row - 1) * gridSize + col - 1;
         int p = convert(row, col);
-        // return weightedQuickUnionUFFullSite.find(p) ==
-        // weightedQuickUnionUFFullSite.find(gridSize * gridSize);
-        return weightedQuickUnionUF.find(p) == weightedQuickUnionUF.find(gridSize * gridSize);
+        return weightedQuickUnionUFFullSite.find(p) 
+        == weightedQuickUnionUFFullSite.find(N * N);
     }
 
     /**
@@ -114,7 +111,7 @@ public class Percolation {
             return false;
         }
         // 当顶部和底部的两虚拟节点连通时则系统是渗滤的
-        return weightedQuickUnionUF.find(gridSize * gridSize) == weightedQuickUnionUF.find((gridSize * gridSize) + 1);
+        return weightedQuickUnionUF.find(N * N) == weightedQuickUnionUF.find((N * N) + 1);
     }
 
     /**
@@ -125,9 +122,9 @@ public class Percolation {
      * @return 返回真，如果坐标在网格中
      */
     private void validate(int row, int col) {
-        if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
+        if (row < 0 || row >= N || col < 0 || col >= N) {
             throw new java.lang.IndexOutOfBoundsException(
-                    "row or col greater than grid size " + gridSize + ", row: " + row + " col: " + col);
+                    "row or col greater than grid size " + N + ", row: " + row + " col: " + col);
         }
     }
 
@@ -144,11 +141,13 @@ public class Percolation {
         for (int i = 0; i < 4; i++) {
             newRow = row + dx[i];
             newCol = col + dy[i];
-            if (newRow < 0 || newRow >= gridSize || newCol < 0 || newCol >= gridSize) {
+            if (newRow < 0 || newRow >= N || newCol < 0 || newCol >= N) {
                 continue;
             }
             if (isOpen(newRow, newCol)) {
                 weightedQuickUnionUF.union(p, convert(newRow, newCol));
+
+                weightedQuickUnionUFFullSite.union(p, convert(newRow, newCol));
             }
         }
     }
@@ -161,17 +160,17 @@ public class Percolation {
      * @return
      */
     private int convert(int row, int col) {
-        return row * gridSize + col;
+        return row * N + col;
     }
 
     // test client (optional)
-    public static void main(String[] args) {
-        int n = 5;
-        Percolation percolation = new Percolation(n);
-        while (!percolation.percolates()) {
-            int row = StdRandom.uniform(n);
-            int col = StdRandom.uniform(n);
-            percolation.open(row, col);
-        }
-    }
+    // public static void main(String[] args) {
+    //     int n = 5;
+    //     Percolation percolation = new Percolation(n);
+    //     while (!percolation.percolates()) {
+    //         int row = StdRandom.uniform(n);
+    //         int col = StdRandom.uniform(n);
+    //         percolation.open(row, col);
+    //     }
+    // }
 }
