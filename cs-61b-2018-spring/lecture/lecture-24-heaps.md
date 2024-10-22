@@ -71,7 +71,7 @@ public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
 2. 稠密的BST（bushy BST）：难以处理相同优先级的元素和保持稠密
 3. 哈希表（hash table）：查找、删除最小元素过慢
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 这就引入了一种新的数据结构——堆（heap）：
 

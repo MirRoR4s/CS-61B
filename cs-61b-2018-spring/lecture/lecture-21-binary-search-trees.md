@@ -163,11 +163,11 @@ static BST insert(BST T, Key ik) {
 2. BST在随机情况下的高度大概率是  logN ，为什么不混淆输入数据以避免最坏情况的发生？
 3. 用给定序列`A X C S E R H` 构造BST，画出最好情况下的图形
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 4. 删除上题BST的根节点
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

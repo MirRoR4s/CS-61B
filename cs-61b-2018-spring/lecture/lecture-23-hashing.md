@@ -1,8 +1,8 @@
 # Lecture 23 Hashing
 
-- [PPT](https://docs.google.com/presentation/d/1hRUkaONWvWP7IZbINLP-G6uOyyulDqury5kop7638co)
+* [PPT](https://docs.google.com/presentation/d/1hRUkaONWvWP7IZbINLP-G6uOyyulDqury5kop7638co)
 
----
+***
 
 ## 定义
 
@@ -25,7 +25,7 @@
 
 一般来说，不同类型的 key 需要不同的哈希函数。
 
-对于**正整数（positive integer）**类型的 key，常用的哈希函数是 **modular hashing**，也就是令哈希为 key 除以**哈希表大小 M** 的余数。此处 M 最好是一个素数，这样才能够均匀地将 key 映射到 索引区间 \[0, M-1]。
+对于**正整数（positive integer）类型的 key，常用的哈希函数是 modular hashing，也就是令哈希为 key 除以哈希表大小 M** 的余数。此处 M 最好是一个素数，这样才能够均匀地将 key 映射到 索引区间 \[0, M-1]。
 
 对于浮点类型（(0, 1) 之间的实数）的 key，常用的哈希函数是将 key 乘以 M 后向下舍入到最近的整数。不过这个方法的缺点是为最高位赋予了更多的权重，这可能会使得最低位在哈希的计算中不起作用，所以更好的做法可能是对 key 的二进制表示（binary representation）利用 modular hashing 计算哈希，这也是 Java 的做法。
 
@@ -67,7 +67,7 @@ public class Transaction
 }
 ```
 
----
+***
 
 ## 冲突处理
 
@@ -78,9 +78,28 @@ public class Transaction
 
 ### External Chaining
 
-External Chaining 的思想就是将所有哈希相同的 items 存储在一个链表（linked list）中。这些键值对之间通过链表串联起来，这样当我们想要根据 key 查找对应的 value 时，需要先通过哈希找到该 key 所在的链表，然后再线性搜索该链表。
+External Chaining 的思想就是将哈希相同的所有 items 存储在一个**链表**（linked list）中。
 
-* 推论说明链表长度为 N/M（该比值称为 load factor） 的一个小常量倍数的概率接近于 1，这表明我们可以方便地在时空间做出权衡。
-* 注意哈希并不适用于有顺序要求的符号表 symbol table，因为寻找最值的操作是线性的。
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>External Chaining 示例</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+#### External Chaining 性能分析
+
+External Chaining 的查找和插入操作的时间复杂度取决于 bucket 中所含的元素个数。如果 N 个元素均匀地分布到 M 个 bucket 中，那么上述两个操作的**平均时间复杂度**为 $$\Theta(L)$$，其中 L = N/ M，也被称为 load factor。
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+可以看出，当 L 很小时，查找和插入操作的速度是非常快的，所以为了保持性能，我们应该通过某种办法让 L 保持较小的值。
+
+具体的办法是在 L 超出某个阈值时增加 bucket 的数量：
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>load factor 大于等于 1，扩容</p></figcaption></figure>
+
+上述所讲的数据结构称为哈希表：
+
+* 通过一个哈希函数将每个 item 映射到某个索引处的 bucket 中
+
+
+
+
+
+> 注意哈希并不适用于有顺序要求的符号表 symbol table，因为寻找最值的操作是线性的。

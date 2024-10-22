@@ -1,8 +1,8 @@
 # Table of contents
 
 * [CS 61B 2018 Spring](README.md)
-  * [Lab](cs-61b-2018-spring/lab/README.md)
-    * [Lab 9](cs-61b-2018-spring/lab/lab-9.md)
+  * [Lab](readme/lab/README.md)
+    * [Lab 9](readme/lab/lab-9.md)
   * [Lecture](cs-61b-2018-spring/lecture/README.md)
     * [Lecture 19](cs-61b-2018-spring/lecture/lecture-19.md)
     * [Lecture 20 Disjoint Sets](cs-61b-2018-spring/lecture/lecture-20-disjoint-sets.md)
@@ -11,7 +11,7 @@
     * [Lecture 23 Hashing](cs-61b-2018-spring/lecture/lecture-23-hashing.md)
     * [Lecture 24 Heaps](cs-61b-2018-spring/lecture/lecture-24-heaps.md)
   * [HW](cs-61b-2018-spring/hw/README.md)
-    * [HW 2: Percolation](cs-61b-2018-spring/hw/hw-2-percolation.md)
+    * [HW 2: Percolation](readme/hw/hw-2-percolation.md)
   * [Project](cs-61b-2018-spring/project/README.md)
     * [Project 1](cs-61b-2018-spring/project/project-1.md)
   * [Disc](cs-61b-2018-spring/disc/README.md)
