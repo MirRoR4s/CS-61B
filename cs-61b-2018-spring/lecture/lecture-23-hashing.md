@@ -52,12 +52,12 @@ public class Transaction
  private final double amount;
  public int hashCode()
  {
-  int hash = 17;
-  hash = 31 * hash + who.hashCode();
-  hash = 31 * hash + when.hashCode();
-  hash = 31 * hash
-  + ((Double) amount).hashCode();
-  return hash;
+    int hash = 17;
+    hash = 31 * hash + who.hashCode();
+    hash = 31 * hash + when.hashCode();
+    hash = 31 * hash
+    + ((Double) amount).hashCode();
+    return hash;
  }
  ...
 }
@@ -76,7 +76,7 @@ public class Transaction
 
 seperate chaning 的思想很简单，就是让哈希表存储一组哈希相同的键值对，而非一个键值对。这些键值对之间通过链表串联起来，这样当我们想要根据 key 查找对应的 value 时，需要先通过哈希找到该 key 所在的链表，然后再线性搜索该链表。
 
-* 推论说明链表长度为 N/M 的一个小常量倍数的概率接近于 1，这表明我们可以方便地在时空间做出权衡。
+* 推论说明链表长度为 N/M（该比值称为 load factor） 的一个小常量倍数的概率接近于 1，这表明我们可以方便地在时空间做出权衡。
 * 注意哈希并不适用于有顺序要求的符号表 symbol table，因为寻找最值的操作是线性的。
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
