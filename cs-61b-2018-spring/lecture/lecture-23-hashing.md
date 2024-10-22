@@ -1,8 +1,12 @@
 # Lecture 23 Hashing
 
+- [PPT](https://docs.google.com/presentation/d/1hRUkaONWvWP7IZbINLP-G6uOyyulDqury5kop7638co)
+
+---
+
 ## 定义
 
-哈希是实现符号表的方法之一，可在$$\Theta(1)$$（摊销后）的时间复杂度内实现搜索和插入操作。
+哈希是实现符号表的方法之一，可在 $$\Theta(1)$$（摊销后）的时间复杂度内实现搜索和插入操作。
 
 ## 搜索
 
@@ -30,7 +34,7 @@
 ```java
 int hash = 0;
 for (int i = 0; i < s.length(); i++) // N 是字符串的长度
- hash = (R * hash + s.charAt(i)) % M;
+   hash = (R * hash + s.charAt(i)) % M;
 ```
 
 以上代码相当于将字符串视为一个 N 位的 R（注意 R 最好是素数，这样才能让字符的所有比特都起作用）进制数。Java 在计算 string key 的哈希时也使用了类似的方法。
@@ -63,18 +67,18 @@ public class Transaction
 }
 ```
 
-***
+---
 
 ## 冲突处理
 
 解决哈希冲突的办法一般有两种：
 
-1. **seperate chaining**
+1. **Seperate Chaining** 或者叫 **External Chaining**
 2. linear probing
 
-### seperate chaning
+### External Chaining
 
-seperate chaning 的思想很简单，就是让哈希表存储一组哈希相同的键值对，而非一个键值对。这些键值对之间通过链表串联起来，这样当我们想要根据 key 查找对应的 value 时，需要先通过哈希找到该 key 所在的链表，然后再线性搜索该链表。
+External Chaining 的思想就是将所有哈希相同的 items 存储在一个链表（linked list）中。这些键值对之间通过链表串联起来，这样当我们想要根据 key 查找对应的 value 时，需要先通过哈希找到该 key 所在的链表，然后再线性搜索该链表。
 
 * 推论说明链表长度为 N/M（该比值称为 load factor） 的一个小常量倍数的概率接近于 1，这表明我们可以方便地在时空间做出权衡。
 * 注意哈希并不适用于有顺序要求的符号表 symbol table，因为寻找最值的操作是线性的。
