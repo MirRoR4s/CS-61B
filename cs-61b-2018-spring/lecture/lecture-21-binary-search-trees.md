@@ -4,8 +4,6 @@
 
 接下来开始要进入一些高级数据结构的学习了，在那之前建议先看一下这篇[综述](https://joshhug.gitbooks.io/hug61b/content/chap10/chap101.html)以对这些数据结构支持的操作有一个基本的了解。
 
-这节课学习的内容如下：
-
 这节课学习 BST（Binary Search Tree），了解如何在 BST 中查询、插入、删除元素。
 
 * [文章](https://joshhug.gitbooks.io/hug61b/content/chap10/chap102.html)
@@ -13,9 +11,9 @@
 * [视频](https://www.youtube.com/watch?v=OvIg\_6SREVA)
 * [习题](https://sp18.datastructur.es/materials/lectures/lec21/lec21)
 
-BST 是符号表（Symbol Table）的一种实现方式之一。BST 的想法主要来源于希望在**有序链表中**像**有序数组**那样进行快速的搜索操作**。**
+BST 是符号表（Symbol Table）的一种实现方式之一，其想法主要来源于希望在**有序链表**中像**有序数组**那样进行快速的搜索操作**。**
 
-> 符号表是一种支持对键值对（key-value pair）进行搜索和插入的数据结构
+> 符号表是一种支持搜索和插入键值对（key-value pair）的数据结构
 
 ***
 
