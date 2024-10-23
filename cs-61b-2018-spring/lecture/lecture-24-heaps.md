@@ -13,7 +13,7 @@
 
 ## 优先队列
 
-优先队列即队列中的元素具备一定的优先级或顺序（递增或者递减）的队列，如果是递增顺序，那么则为最小优先队列，否则则为最大优先队列。本节课希望对以下的最小优先队列接口进行实现：
+优先队列即队列中的元素具备一定的优先级或顺序（递增或者递减）的队列，如果是递增顺序，那么则为最小优先队列，否则称为最大优先队列。本节课实现了以下的最小优先队列接口：
 
 ```java
 public interface MinPQ<Item> {
@@ -30,20 +30,19 @@ public interface MinPQ<Item> {
 
 一个平凡的解决方案是用一个列表存储当天的所有消息，然后排序列表返回前 M 条最不和谐的消息。这个方案的缺点在于**内存消耗过多**——正比于消息的数量。
 
-```java
-public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
-    ArrayList<String> allMessages = new ArrayList<String>();
+<pre class="language-java"><code class="lang-java"><strong>public List&#x3C;String> unharmoniousTexts(Sniffer sniffer, int M) {
+</strong>    ArrayList&#x3C;String> allMessages = new ArrayList&#x3C;String>();
     
-    for (Timer timer = new Timer(); timer.hours() < 24; ) {
+    for (Timer timer = new Timer(); timer.hours() &#x3C; 24; ) {
          allMessages.add(sniffer.getNextMessage());   
     }
     
-    Comparator<String> cmptr = new HarmoniousnessComparator();
+    Comparator&#x3C;String> cmptr = new HarmoniousnessComparator();
     Collections.sort(allMessage, cmptr, Collections.reverseOrder());
     return allMessage.sublist(0, M);
-```
+</code></pre>
 
-一个更好的解决方案是利用上述提到的**优先队列**。我们可以动态地维护一个优先队列，每收到一个消息就向队列中插入，这里的关键在于当队列的长度超过了 M，就移除掉队列中最小（最和谐）的元素。
+一个更好的解决方案是利用上述提到的**优先队列**。我们可以动态地维护一个优先队列，每收到一个消息就插入到队列中。此处的关键在于当队列的长度超过了 M，就移除掉队列中最小（最和谐）的元素。
 
 ```java
 public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
@@ -65,19 +64,19 @@ public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
 
 ## 堆
 
-下面描述实现优先队列的一些数据结构：
+下面给出一些实现优先队列的数据结构：
 
 1. 有序列表（ordered list）：删除最小元素过慢
-2. 稠密的BST（bushy BST）：难以处理相同优先级的元素和保持稠密
+2. 稠密的 BST（bushy BST）：难以处理相同优先级的元素和保持稠密
 3. 哈希表（hash table）：查找、删除最小元素过慢
 
 <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 这就引入了一种新的数据结构——堆（heap）：
 
-堆实际上是一个满足以下两种性质的二叉树：
+堆实际上是一个满足以下两种性质的**二叉树**：
 
-1. 每个节点小于/大于等于其子节点。（该性质是递归的，所以**根节点**是树中**最小/最大**的节点，对应的堆也称为最小堆和最大堆）
+1. 每个节点小于等于/大于等于其子节点。（该性质是递归的，所以**根节点**是树中**最小/最大**的节点，对应的堆也称为最小堆和最大堆）
 2. 完全的（complete），叶节点只会出现在树的底部。如果树不是满的，那么叶节点总依靠在左边。
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>堆的示例，绿色的是堆，红色的不是</p></figcaption></figure>
@@ -86,21 +85,21 @@ public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
 
 ### 获取最小节点
 
-根据堆的性质，树的根节点就是最小节点。
+根据堆的性质，根节点就是最小节点。
 
 ### 添加节点
 
-暂时将待添加节点放入堆的末尾，之后一步步上浮该节点直至其处于正确的位置。
+暂时将待添加节点放入堆的末尾，之后一步步**上浮**该节点直至其处于正确的位置。
 
 ### 删除最小节点
 
-将最后一个节点和根节点交换，然后删除原有根节点，之后一步步下沉最后一个节点，直至该节点处于正确的位置。
+将最后一个节点和根节点交换，然后删除根节点，之后一步步**下沉**最后一个节点，直至该节点处于正确的位置。
 
 ***
 
 ## 树的表示
 
-因为堆是完全的（complete），所以我们只需要用一个数组存储 keys，而无需存储与树结构相关的信息。
+因为堆是完全的（complete），所以可以只用一个数组存储 keys，而不存储与树的结构相关的信息。
 
 ```java
 public class Tree3<Key> {
@@ -108,7 +107,7 @@ public class Tree3<Key> {
 }
 ```
 
-> 注意该方法仅在树是完全的情况下才有效。
+> 注意该方法仅当树完全（complete）时才有效。
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
@@ -132,11 +131,11 @@ public int parent(int k) {
 }
 ```
 
-最后还可以稍微优化一下上面的表示，具体地说，我们让节点的索引从1开始，0则空着。
+最后还可以稍微优化一下上面的表示，具体地说，我们让节点的索引从 1 开始，0 则空着。
 
 <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
-这样就可以使得获取节点的左/右子节点以及父节点变得更加自然：
+这样就可以使得获取节点的左/右子节点以及父节点变得更加“自然”：
 
 
 
