@@ -12,6 +12,7 @@
     * [Lecture 24 Heaps](cs-61b-2018-spring/lecture/lecture-24-heaps.md)
   * [HW](cs-61b-2018-spring/hw/README.md)
     * [HW 2: Percolation](readme/hw/hw-2-percolation.md)
+    * [HW 3: Hashing](readme/hw/hw-3-hashing.md)
   * [Project](cs-61b-2018-spring/project/README.md)
     * [Project 1](cs-61b-2018-spring/project/project-1.md)
   * [Disc](cs-61b-2018-spring/disc/README.md)
