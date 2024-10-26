@@ -4,6 +4,7 @@
   * [Lab](readme/lab/README.md)
     * [Lab 9](readme/lab/lab-9.md)
   * [Lecture](cs-61b-2018-spring/lecture/README.md)
+    * [Lecture 1 Intro, Hello World Java](readme/lecture/lecture-1-intro-hello-world-java.md)
     * [Lecture 19](cs-61b-2018-spring/lecture/lecture-19.md)
     * [Lecture 20 Disjoint Sets](cs-61b-2018-spring/lecture/lecture-20-disjoint-sets.md)
     * [Lecture 21 Binary Search Trees](cs-61b-2018-spring/lecture/lecture-21-binary-search-trees.md)
