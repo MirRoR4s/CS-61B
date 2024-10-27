@@ -1,7 +1,9 @@
 package hw3.hash;
-import java.awt.Color;
-import edu.princeton.cs.algs4.StdRandom;
+
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdRandom;
+
+import java.awt.*;
 
 
 public class SimpleOomage implements Oomage {
@@ -10,26 +12,40 @@ public class SimpleOomage implements Oomage {
     protected int blue;
 
     private static final double WIDTH = 0.01;
-    private static final boolean USE_PERFECT_HASH = false;
+    private static final boolean USE_PERFECT_HASH = true;
 
     @Override
     public boolean equals(Object o) {
-        // TODO: Write this method.
-        return false;
+        if (o == this) return true;
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        SimpleOomage simpleOomage = (SimpleOomage) o;
+        return this.red == simpleOomage.red && this.green == simpleOomage.green && this.blue == simpleOomage.blue;
+
+//        // TODO: Write this method.
+//        return false;
     }
 
-    /* Uncomment this method after you've written
-       equals and failed the testHashCodeAndEqualsConsistency
-       test.
     @Override
     public int hashCode() {
+        /*
+            一种仅当 red、blue、green 都相同时 hashCode 才相同的算法如下：
+            （算法来自 chatGPT：https://chatgpt.com/c/671df5f1-56b4-8011-8903-ba110551cfa4）
+
+            1. red / 5、blue / 5 和 green / 5 的值范围均为 0 到 51，
+               因此可以将它们看成一个 52 进制系统中的三个“位”。
+            2. (red / 5) * 52 * 52 为最高位，表示 a 的位置。
+            3. (blue / 5) * 52 表示中间位。
+            4. (green / 5) 为最低位，表示 c 的位置。
+         */
         if (!USE_PERFECT_HASH) {
             return red + green + blue;
         } else {
             // TODO: Write a perfect hash function for Simple Oomages.
-            return 0;
+//            return 0;
+            return (red / 5) * 52 * 52 + (blue / 5) * 52 + (green / 5);
         }
-    }*/
+    }
 
     public SimpleOomage(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
@@ -67,4 +83,4 @@ public class SimpleOomage implements Oomage {
     public String toString() {
         return "R: " + red + ", G: " + green + ", B: " + blue;
     }
-} 
+}

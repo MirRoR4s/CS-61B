@@ -1,9 +1,11 @@
 package hw3.hash;
-import java.util.List;
-import java.util.ArrayList;
+
 import edu.princeton.cs.algs4.StdDraw;
-import java.awt.Color;
 import edu.princeton.cs.algs4.StdRandom;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComplexOomage implements Oomage {
     protected List<Integer> params;
@@ -11,6 +13,9 @@ public class ComplexOomage implements Oomage {
 
     @Override
     public int hashCode() {
+        /*
+            尝试修复上溢问题——未成功。
+        */
         int total = 0;
         for (int x : params) {
             total = total * 256;
@@ -30,7 +35,7 @@ public class ComplexOomage implements Oomage {
 
     public ComplexOomage(List<Integer> params) {
         if (params == null) {
-            throw new IllegalArgumentException("params must not be null!");            
+            throw new IllegalArgumentException("params must not be null!");
         }
 
         for (Integer x : params) {
@@ -81,10 +86,24 @@ public class ComplexOomage implements Oomage {
     }
 
     public static void main(String[] args) {
-        System.out.println("Drawing 4 random complex Oomages.");
-        randomComplexOomage().draw(0.25, 0.25, 1.5);
-        randomComplexOomage().draw(0.75, 0.75, 1.5);
-        randomComplexOomage().draw(0.25, 0.75, 1.5);
-        randomComplexOomage().draw(0.75, 0.25, 1.5);
+//        System.out.println("Drawing 4 random complex Oomages.");
+//        randomComplexOomage().draw(0.25, 0.25, 1.5);
+//        randomComplexOomage().draw(0.75, 0.75, 1.5);
+//        randomComplexOomage().draw(0.25, 0.75, 1.5);
+//        randomComplexOomage().draw(0.75, 0.25, 1.5);
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(0);
+       list.add(0);
+       list.add(0);
+       list.add(5);
+        ComplexOomage complexOomage = new ComplexOomage(list);
+        System.out.print(complexOomage.hashCode()); // 5
+        /*
+            [1, 0, 0, 0] -> 16777216
+            [1, 0, 0, 0, 5] -> 5
+
+         */
     }
-} 
+}
