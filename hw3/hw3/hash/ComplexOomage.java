@@ -52,11 +52,13 @@ public class ComplexOomage implements Oomage {
     public int hashCode() {
         /*
             尝试修复上溢问题——未成功。
+            code from chatGPT @ https://chatgpt.com/c/671e1a2e-7520-8011-91b3-fbe73f8ec3d9
+            use prime factor and bit operation
         */
-        int total = 0;
+        int total = 1;
+        int prime = 31;
         for (int x : params) {
-            total = total * 256;
-            total = total + x;
+           total = total * prime + (x & 0xFF);
         }
         return total;
     }
