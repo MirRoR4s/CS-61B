@@ -23,12 +23,12 @@ public class OomageTestUtility {
         for (int i = 0; i < M; i++) {
             buckets[i] = new LinkedList<>();
         }
-        for (Oomage o: oomages) {
-            int bucketNum =  (o.hashCode() & 0x7FFFFFFF) % M;
+        for (Oomage o : oomages) {
+            int bucketNum = (o.hashCode() & 0x7FFFFFFF) % M;
             buckets[bucketNum].add(o);
         }
         int N = oomages.size();
-        for (LinkedList<Oomage> bucket: buckets) {
+        for (LinkedList<Oomage> bucket : buckets) {
             if (bucket.size() < N / 50 || bucket.size() > N / 2.5) {
                 return false;
             }

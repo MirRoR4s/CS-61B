@@ -11,6 +11,13 @@ import static org.junit.Assert.*;
 
 public class TestSimpleOomage {
 
+    /**
+     * Calls tests for SimpleOomage.
+     */
+    public static void main(String[] args) {
+        jh61b.junit.textui.runClasses(TestSimpleOomage.class);
+    }
+
     @Test
     public void testHashCodeDeterministic() {
         SimpleOomage so = SimpleOomage.randomSimpleOomage();
@@ -31,17 +38,17 @@ public class TestSimpleOomage {
             2. 遍历该数据结构，从中获取两个不同的对象，并判断它们的 hashCode 是否相等。
          */
         ArrayList<SimpleOomage> arrayList = new ArrayList<SimpleOomage>();
-        for(int i = 0; i <= 255; i += 5) {
+        for (int i = 0; i <= 255; i += 5) {
             for (int j = i + 5; j <= 255; j += 5) {
                 for (int k = j + 5; k <= 255; k += 5) {
-                  SimpleOomage ooTmp = new SimpleOomage(i, j, k);
-                  arrayList.add(ooTmp);
+                    SimpleOomage ooTmp = new SimpleOomage(i, j, k);
+                    arrayList.add(ooTmp);
                 }
             }
         }
 
         for (int i = 0; i < arrayList.size(); i++) {
-            for (int j = i+1; j < arrayList.size(); j++) {
+            for (int j = i + 1; j < arrayList.size(); j++) {
                 SimpleOomage ooA = arrayList.get(i);
                 SimpleOomage ooB = arrayList.get(j);
                 assertNotEquals(ooA.toString() + "\n\t" + ooB.toString(), ooA.hashCode(), ooB.hashCode());
@@ -81,10 +88,5 @@ public class TestSimpleOomage {
         }
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
-    }
-
-    /** Calls tests for SimpleOomage. */
-    public static void main(String[] args) {
-        jh61b.junit.textui.runClasses(TestSimpleOomage.class);
     }
 }

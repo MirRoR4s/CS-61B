@@ -10,6 +10,13 @@ import static org.junit.Assert.assertTrue;
 
 public class TestComplexOomage {
 
+    /**
+     * Calls tests for SimpleOomage.
+     */
+    public static void main(String[] args) {
+        jh61b.junit.textui.runClasses(TestComplexOomage.class);
+    }
+
     @Test
     public void testHashCodeDeterministic() {
         ComplexOomage so = ComplexOomage.randomComplexOomage();
@@ -63,12 +70,6 @@ public class TestComplexOomage {
         }
 
 
-
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
-    }
-
-    /** Calls tests for SimpleOomage. */
-    public static void main(String[] args) {
-        jh61b.junit.textui.runClasses(TestComplexOomage.class);
     }
 }
