@@ -26,9 +26,9 @@ public class TestSimpleOomage {
   @Test
   public void testHashCodePerfect() {
     /*
-       1. 首先用一个数据结构保存所有可能的 Oomage 对象
-       2. 遍历该数据结构，从中获取两个不同的对象，并判断它们的 hashCode 是否相等。
-    */
+     * 1. 首先用一个数据结构保存所有可能的 Oomage 对象
+     * 2. 遍历该数据结构，从中获取两个不同的对象，并判断它们的 hashCode 是否相等。
+     */
     ArrayList<SimpleOomage> arrayList = new ArrayList<SimpleOomage>();
     for (int i = 0; i <= 255; i += 5) {
       for (int j = i + 5; j <= 255; j += 5) {

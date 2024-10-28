@@ -32,7 +32,8 @@ public class TestNiceSpreadOomage {
     }
 
     @Override
-    public void draw(double x, double y, double scalingFactor) {}
+    public void draw(double x, double y, double scalingFactor) {
+    }
 
     @Override
     public int hashCode() {

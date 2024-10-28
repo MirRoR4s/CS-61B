@@ -23,9 +23,11 @@ public class TestComplexOomage {
     }
   }
 
-  /* This should pass if your OomageTestUtility.haveNiceHashCodeSpread
-  is correct. This is true even though our given ComplexOomage class
-  has a flawed hashCode. */
+  /*
+   * This should pass if your OomageTestUtility.haveNiceHashCodeSpread
+   * is correct. This is true even though our given ComplexOomage class
+   * has a flawed hashCode.
+   */
   @Test
   public void testRandomOomagesHashCodeSpread() {
     List<Oomage> oomages = new ArrayList<>();
@@ -44,14 +46,14 @@ public class TestComplexOomage {
 
     // Your code here.
     /*
-       这里要针对 hashCode 方法的缺陷特意构造一组会导致测试失败的输入
-       16777216 * 256 = 0 上溢
-       [1, 0, 0, 0] -> 16777216
-       [1, 0, 0, 0, 10] -> 10
-
-       1. 创建10个整型数组，分别包含 [1, 0, 0, 0, 10 * i]，i 是数组的序号，从1到10
-       2. 用这10个整型数组初始化10个 Oomage
-    */
+     * 这里要针对 hashCode 方法的缺陷特意构造一组会导致测试失败的输入
+     * 16777216 * 256 = 0 上溢
+     * [1, 0, 0, 0] -> 16777216
+     * [1, 0, 0, 0, 10] -> 10
+     * 
+     * 1. 创建10个整型数组，分别包含 [1, 0, 0, 0, 10 * i]，i 是数组的序号，从1到10
+     * 2. 用这10个整型数组初始化10个 Oomage
+     */
 
     for (int i = 0; i < 10; i++) {
       ArrayList<Integer> tmpList = new ArrayList<>();
