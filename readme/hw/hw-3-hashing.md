@@ -6,7 +6,7 @@ description: 为某个类编写 hashCode 和 equal 方法，并进行相应的�
 
 ## 前言
 
-在开始编写 HW3 之前，首先应该完成以下材料的阅读：
+在开始 HW3 之前，首先应该完成以下材料的阅读：
 
 1. [章节12](https://joshhug.gitbooks.io/hug61b/content/chap12/chap121.html)
 2. [PPT](https://docs.google.com/presentation/d/1hRUkaONWvWP7IZbINLP-G6uOyyulDqury5kop7638co/edit#slide=id.g3522bc225a\_0\_37)
