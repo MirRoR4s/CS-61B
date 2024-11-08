@@ -3,6 +3,7 @@
 * [CS 61B 2018 Spring](README.md)
   * [Lab](readme/lab/README.md)
     * [Lab 9](readme/lab/lab-9.md)
+    * [Lab 10](readme/lab/lab-10.md)
   * [Lecture](cs-61b-2018-spring/lecture/README.md)
     * [Lecture 1 Intro, Hello World Java](readme/lecture/lecture-1-intro-hello-world-java.md)
     * [Lecture 19](cs-61b-2018-spring/lecture/lecture-19.md)
