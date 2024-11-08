@@ -1,6 +1,6 @@
 # Lecture 24 Heaps
 
-* [PPT](https://docs.google.com/presentation/d/1ySYTxnvoHJc7\_2U0L90WH3kx0toWA4vpNiIR2r1vqKU)
+{% embed url="https://docs.google.com/presentation/d/1ySYTxnvoHJc7_2U0L90WH3kx0toWA4vpNiIR2r1vqKU" %}
 
 ## 简介
 
