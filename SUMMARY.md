@@ -11,6 +11,7 @@
     * [Lecture 22 Balanced BSTs](cs-61b-2018-spring/lecture/lecture-22-balanced-bsts.md)
     * [Lecture 23 Hashing](cs-61b-2018-spring/lecture/lecture-23-hashing.md)
     * [Lecture 24 Heaps](cs-61b-2018-spring/lecture/lecture-24-heaps.md)
+    * [Lecture 25 Advanced Trees, incl. Geometric](readme/lecture/lecture-25-advanced-trees-incl.-geometric.md)
   * [HW](cs-61b-2018-spring/hw/README.md)
     * [HW 2: Percolation](readme/hw/hw-2-percolation.md)
     * [HW 3: Hashing](readme/hw/hw-3-hashing.md)
