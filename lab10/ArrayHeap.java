@@ -133,12 +133,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         if (childIndex + 1 <= this.size && getNode(childIndex + 1).myPriority < getNode(childIndex).myPriority) {
             childIndex++;
         }
-        
-        if (getNode(index).myPriority > getNode(childIndex).myPriority) {
+
+        if (childIndex <= this.size && getNode(index).myPriority > getNode(childIndex).myPriority) {
             swap(index, childIndex);
             sink(childIndex);
         }
-
         return;
     }
 
@@ -179,7 +178,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
-        
+
         T item = peek();
         swap(1, this.size);
         this.contents[size] = null;
@@ -207,11 +206,22 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        for (Node node: this.contents) {
+
+        for (int i = 1; i < this.contents.length; i++) {
+            Node node = contents[i];
+
             if (node.myItem.equals(item)) {
+                double p = node.myPriority;
                 node.myPriority = priority;
+                if (p > priority) {
+                    sink(i);
+                } else {
+                    swim(i);
+                }
+
             }
         }
+
         return;
     }
 
