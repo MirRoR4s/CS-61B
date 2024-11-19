@@ -107,7 +107,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         validateSinkSwimArg(index);
 
         int parentIndex = parentIndex(index);
-        if (parentIndex == 0) {
+        if (!inBounds(parentIndex)) {
             return;
         }
 
@@ -125,16 +125,14 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        int childIndex = leftIndex(index);
-        if (childIndex > this.size) {
+        // int childIndex = leftIndex(index);
+        int leftChildIndex = 2 * index;
+        if (!inBounds(leftChildIndex)) {
             return;
         }
+        int childIndex = min(leftChildIndex, leftChildIndex + 1);
 
-        if (childIndex + 1 <= this.size && getNode(childIndex + 1).myPriority < getNode(childIndex).myPriority) {
-            childIndex++;
-        }
-
-        if (childIndex <= this.size && getNode(index).myPriority > getNode(childIndex).myPriority) {
+        if (inBounds(childIndex) && getNode(index).myPriority > getNode(childIndex).myPriority) {
             swap(index, childIndex);
             sink(childIndex);
         }
@@ -208,21 +206,17 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-
         for (int i = 1; i < size; i++) {
             Node node = contents[i];
             if (node.myItem.equals(item)) {
-                double p = node.myPriority;
+                double oldPriority = node.myPriority;
                 node.myPriority = priority;
-                if (p > priority) {
-                    sink(i);
-                } else {
+                if (oldPriority > priority)
                     swim(i);
-                }
-
+                else
+                    sink(i);
             }
         }
-
         return;
     }
 
