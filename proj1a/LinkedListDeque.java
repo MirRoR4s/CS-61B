@@ -1,125 +1,144 @@
 /**
- * @author Jian Tao Huang
-*/
+ * A double ended queue implementation that support any data type based
+ * on linked list. This implementation apply one sentinel and the circular
+ * double link to attain fast and elegant addFirst and addLast method.
+ */
 public class LinkedListDeque<T> {
-    private class IntNode {
-        private IntNode prev;
-        private IntNode next;
+    private class Node {
+        private Node prev;
+        private Node next;
         private T item;
 
-        public IntNode(T item, IntNode prev, IntNode next) {
+        public Node(T item, Node prev, Node next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
         }
     }
 
-    /*
-     * 哨兵节点 sentinel
-     * 哨兵节点的下一个节点始终指向队列的第一个节点
-     */
-    private IntNode sentinel;
-    // 记录链表长度
-    private int size;
+    private Node sentinel; // a dummy node that always point to the first node.
+    private int size; // the size of this deque.
 
     /**
-     * 创建一个空的链表队列
+     * create a empty deque.
      */
     public LinkedListDeque() {
-        sentinel = new IntNode(null, null, null);
-        // 当链表为空时，prev 和 next 都指向哨兵节点自身。
+        sentinel = new Node(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
         size = 0;
     }
 
+    /**
+     * Adds an item to the front of this deque.
+     * 
+     * @param item
+     */
     public void addFirst(T item) {
-        // 创建节点，其 prev 指向哨兵，其 next 指向哨兵的 next
-        IntNode p = new IntNode(item, sentinel, sentinel.next);
-        // 将原先头节点的 prev 改为 p
-        sentinel.next.prev = p;
-        // 将哨兵节点的 next 设为 p，
-        sentinel.next = p;
+        Node oldNode = sentinel.next;
+        Node newNode = new Node(item, sentinel, oldNode);
+
+        sentinel.next = newNode;
+        oldNode.prev = newNode;
         size++;
     }
 
     /**
-     * 将 item 置于队尾
+     * Adds an item to the back of this deque.
      * 
      * @param item
      */
     public void addLast(T item) {
-        IntNode p = new IntNode(item, sentinel.prev, sentinel);
-        // 将旧队尾节点指向新队尾节点
-        sentinel.prev.next = p;
-        // 将哨兵节点的 prev 指向 p
-        sentinel.prev = p;
+        Node oldLastNode = sentinel.prev;
+        Node newLastNode = new Node(item, oldLastNode, sentinel);
+
+        oldLastNode.next = newLastNode;
+        sentinel.prev = newLastNode;
         size++;
     }
 
+    /**
+     * return true when this deque is empty, otherwise return false.
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * return the size of this deque.
+     */
     public int size() {
         return size;
     }
 
     /**
-     * 以空格作为分隔符从头至尾打印队列中的元素
+     * Prints the items in this deque from first to last, separated by a space.
      */
     public void printDeque() {
-        IntNode p = sentinel.next;
+        Node p = sentinel.next;
         while (p != sentinel) {
             System.out.println(p.item + " ");
             p = p.next;
         }
     }
 
+    /**
+     * Removes and returns the item at the front of this deque. If no
+     * such item exists, returns null.
+     * 
+     * @return the item at the front of this deque.
+     */
     public T removeFirst() {
         if (size == 0) {
             return null;
         }
-        // 获取头节点
-        IntNode p = sentinel.next;
-        // 将哨兵指向头节点后一个节点
-        sentinel.next = p.next;
-        // 将第二个节点的 prev 改为哨兵
-        p.next.prev = sentinel;
+
+        Node oldFirstNode = sentinel.next;
+        Node newFirstNode = oldFirstNode.next;
+        sentinel.next = newFirstNode;
+        newFirstNode.prev = sentinel;
+
         size--;
-        return p.item;
+        T item = oldFirstNode.item;
+        oldFirstNode = null;
+        return item;
     }
 
     /**
-     * 删除并返回队尾元素
+     * Removes and returns the item at the back of this deque. If not
+     * such item exists, returns null.
      * 
-     * @return 队尾元素，如果不存在返回 null
+     * @return the item at the back of this deque.
      */
     public T removeLast() {
         if (size == 0) {
             return null;
         }
-        T ans = sentinel.prev.item;
-        // 将哨兵指向倒数第二个节点
-        sentinel.prev = sentinel.prev.prev;
-        // 将倒数第二个节点的 next 改为哨兵
-        sentinel.prev.next = sentinel;
+
+        Node oldLastNode = sentinel.prev;
+        Node newLastNode = oldLastNode.prev;
+        sentinel.prev = newLastNode;
+        newLastNode.next = sentinel;
+
         size--;
-        return ans;
+        T item = oldLastNode.item;
+        oldLastNode = null;
+        return item;
     }
 
     /**
-     * 获取队列第 index 个元素（从零开始）
+     * Gets the item at the given index, where 0 is the front, 1 is
+     * the next item, and so forth. If no such item exists, returns null.
      * 
-     * @param index 下标
-     * @return 队列第 index 个元素，如果不存在则返回 null
+     * @param index the index of the item.
+     * @return the item at the given index.
      */
     public T get(int index) {
         if (index >= size) {
             return null;
         }
-        // 不得修改队列
-        IntNode p = sentinel.next;
+
+        Node p = sentinel.next;
         for (int i = 0; i < index; i++) {
             p = p.next;
         }
@@ -127,22 +146,24 @@ public class LinkedListDeque<T> {
     }
 
     /**
-     * 与 get 相同，但采用递归实现
+     * The same as get method, but uses recursion.
      * 
-     * @param index
-     * @return
+     * @param index the index of the item.
+     * @return the item at the given index.
      */
     public T getRecursive(int index) {
         if (index >= size) {
             return null;
         }
+
         return getRecursive(sentinel.next, index);
     }
 
-    private T getRecursive(IntNode p, int index) {
+    private T getRecursive(Node p, int index) {
         if (index == 0) {
             return p.item;
         }
+
         return getRecursive(p.next, index - 1);
     }
 }

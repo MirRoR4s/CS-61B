@@ -18,13 +18,14 @@ public class ArrayDequeTest {
 
     @Test
     public void testAddLast() {
-        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
-        ad1.addLast(1);
-        ad1.addLast(2);
-        ad1.addLast(3);
-        int ans = ad1.get(0);
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        deque.addLast(1);
+        deque.addLast(2);
+        deque.addLast(3);
+
+        int ans = deque.get(0);
         assertEquals(1, ans);
-        ans = ad1.get(1);
+        ans = deque.get(1);
         assertEquals(2, ans);
     }
 
@@ -60,7 +61,4 @@ public class ArrayDequeTest {
         ad1.removeFirst();
         assertEquals(ad1.size(), 0);
     }
-
-
-
 }

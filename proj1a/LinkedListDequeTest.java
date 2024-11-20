@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 /**
  * Performs some basic linked list tests.
  */
@@ -67,8 +66,10 @@ public class LinkedListDequeTest {
         return true;
     }
 
-    /* Prints a nice message based on whether a test passed.
-     * The \n means newline. */
+    /*
+     * Prints a nice message based on whether a test passed.
+     * The \n means newline.
+     */
     public static void printTestStatus(boolean passed) {
         if (passed) {
             System.out.println("Test passed!\n");
@@ -91,7 +92,8 @@ public class LinkedListDequeTest {
         lld1.addFirst("front");
 
         // The && operator is the same as "and" in Python.
-        // It's a binary operator that returns true if both arguments true, and false otherwise.
+        // It's a binary operator that returns true if both arguments true, and false
+        // otherwise.
         passed = checkSize(1, lld1.size()) && passed;
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 

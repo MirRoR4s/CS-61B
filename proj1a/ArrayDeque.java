@@ -1,70 +1,58 @@
 /**
- * 基于数组的双端队列实现
- * 1. 常量时间增删（调整大小除外）
- * 2. 常量时间获取指定索引元素
- * 3. 常量时间获取长度
- * 4. 数组的起始长度为 8
- * 5. 程序所用内存与项数成正比，对于长度 16 以上的数组，其使用率至少应该在 25 % 以上
- *
- * @author 黄建涛
+ * An deque implementation based on array.
  */
-
 public class ArrayDeque<T> {
-    // 指向队首元素的位置
-    private int front;
-    // 指向队尾元素的下一个位置
-    private int backNext;
+    private int nextFirst;
+    private int nextLast;
     private T[] items;
     private int size;
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        front = 0;
-        backNext = 0;
+        nextFirst = 0;
+        nextLast = 1;
     }
 
-    /**
-     * 修改数组的总长度
-     *
-     * @param cap 修改后数组的总长度
-     */
-    private void reSize(int cap) {
-        T[] newArray = (T[]) new Object[cap];
+    private void resize(int cap) {
+        T[] a = (T[]) new Object[cap];
         for (int i = 0; i < size; i++) {
-            newArray[i] = items[(front + i) % items.length];
+            a[i] = items[(nextFirst + i) % items.length];
         }
-        items = newArray;
-        front = 0;
-        backNext = size;
+
+        items = a;
+        nextFirst = 0;
+        nextLast = size;
     }
 
-    /**
-     * 将 item 置于队首
-     *
-     * @param item
-     */
+    private int leftShift(int a) {
+        return Math.floorMod(a - 1, items.length);
+    }
+
+    private int rightShift(int a) {
+        return Math.floorMod(a + 1, items.length);
+    }
+
     public void addFirst(T item) {
         if (size == items.length) {
-            reSize(size * 2);
+            resize(size * 2);
         }
-        front = (front - 1 + items.length) % items.length;
-        items[front] = item;
-        size += 1;
+
+        items[nextFirst] = item;
+        size++;
+
+        nextFirst = leftShift(nextFirst);
     }
 
-    /**
-     * 将 item 置于队尾
-     *
-     * @param item
-     */
     public void addLast(T item) {
         if (size == items.length) {
-            reSize(items.length * 2);
+            resize(size * 2);
         }
-        items[backNext] = item;
-        backNext = (backNext + 1) % items.length;
-        size += 1;
+
+        items[nextLast] = item;
+        size++;
+
+        nextLast = rightShift(nextLast);
     }
 
     public boolean isEmpty() {
@@ -89,13 +77,17 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        T tmp = items[front];
-        front = (front + 1) % items.length;
-        size = size - 1;
+
+        nextFirst = rightShift(nextFirst);
+        T tmp = items[nextFirst];
+        items[nextFirst] = null;
+        size--;
+
         double usage = (double) size / items.length;
         if (items.length >= 16 && usage < 0.25) {
-            reSize(items.length / 2);
+            resize(items.length / 2);
         }
+
         return tmp;
     }
 
@@ -103,21 +95,20 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        // 最后一个元素的索引
-        int lastIndex = (backNext - 1 + items.length) % items.length;
-        T tmp = items[lastIndex];
-        // 删除最后一个元素
-        items[lastIndex] = null;
-        backNext = lastIndex;
-        size = size - 1;
+        nextLast = leftShift(nextLast);
+        T tmp = items[nextLast];
+        items[nextLast] = null;
+        size--;
+
         double usage = (double) size / items.length;
         if (usage < 0.25 && items.length >= 16) {
-            reSize(items.length / 2);
+            resize(items.length / 2);
         }
         return tmp;
     }
 
     public T get(int index) {
-        return items[(front + index) % items.length];
+        index = Math.floorMod(nextFirst + 1 + index, items.length);
+        return items[index];
     }
 }
