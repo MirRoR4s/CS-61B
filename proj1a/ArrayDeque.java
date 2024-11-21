@@ -21,8 +21,8 @@ public class ArrayDeque<T> {
         }
 
         items = a;
-        nextFirst = 0;
-        nextLast = 1;
+        nextFirst = items.length - 1;
+        nextLast = size;
     }
 
     private int leftShift(int a) {
