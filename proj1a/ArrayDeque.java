@@ -17,12 +17,12 @@ public class ArrayDeque<T> {
     private void resize(int cap) {
         T[] a = (T[]) new Object[cap];
         for (int i = 0; i < size; i++) {
-            a[i] = items[(nextFirst + i) % items.length];
+            a[i] = get(i);
         }
 
         items = a;
         nextFirst = 0;
-        nextLast = size;
+        nextLast = 1;
     }
 
     private int leftShift(int a) {
