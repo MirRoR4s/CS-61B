@@ -8,10 +8,10 @@
 
 * [文章](https://joshhug.gitbooks.io/hug61b/content/chap10/chap102.html)
 * [PPT](https://docs.google.com/presentation/d/1rEHpAx8Xu2LnJBWsRPWy8blL20qb96Q5UhdZtQYFkBI/edit?usp=sharing)
-* [视频](https://www.youtube.com/watch?v=OvIg\_6SREVA)
+* [视频](https://www.youtube.com/watch?v=OvIg_6SREVA)
 * [习题](https://sp18.datastructur.es/materials/lectures/lec21/lec21)
 
-BST 是符号表（Symbol Table）的一种实现方式之一，其想法主要来源于希望在**有序链表**中像**有序数组**那样进行快速的搜索操作**。**
+BST 是符号表（Symbol Table）的一种实现方式之一，其想法主要来源于希望在**有序链表**中像**有序数组**那样进行快速的搜索操&#x4F5C;**。**
 
 > 符号表是一种支持搜索和插入键值对（key-value pair）的数据结构
 
@@ -156,7 +156,7 @@ static BST insert(BST T, Key ik) {
 
 最好是 logN，最坏是 N（比如连续插入一个递增的序列，此时树的高度是线性增加的）
 
-可参考PPT的这[一页](https://docs.google.com/presentation/d/1rEHpAx8Xu2LnJBWsRPWy8blL20qb96Q5UhdZtQYFkBI/edit#slide=id.g75707c75c\_0169)。
+可参考PPT的这[一页](https://docs.google.com/presentation/d/1rEHpAx8Xu2LnJBWsRPWy8blL20qb96Q5UhdZtQYFkBI/edit#slide=id.g75707c75c_0169)。
 
 2. BST在随机情况下的高度大概率是  logN ，为什么不混淆输入数据以避免最坏情况的发生？
 3. 用给定序列`A X C S E R H` 构造BST，画出最好情况下的图形
