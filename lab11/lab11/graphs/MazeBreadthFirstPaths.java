@@ -20,6 +20,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     private Queue<Integer> q;
 
     public MazeBreadthFirstPaths(Maze m, int sourceX, int sourceY, int targetX, int targetY) {
+        // Add more variables here!
         super(m);
         maze = m;
         s = maze.xyTo1D(sourceX, sourceY);
@@ -28,11 +29,12 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
         edgeTo[s] = s;
         q = new LinkedList<>();
         q.add(s);
-        // Add more variables here!
     }
 
     /** Conducts a breadth first search of the maze starting at the source. */
     private void bfs() {
+        // TODO: Your code here. Don't forget to update distTo, edgeTo, and marked, as
+        // well as call announce()
         while (!q.isEmpty()) {
             int v = q.remove();
             marked[v] = true;
@@ -55,8 +57,6 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
                 }
             }
         }
-        // TODO: Your code here. Don't forget to update distTo, edgeTo, and marked, as
-        // well as call announce()
     }
 
     @Override
