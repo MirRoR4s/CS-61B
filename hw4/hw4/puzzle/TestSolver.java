@@ -1,13 +1,9 @@
 package hw4.puzzle;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
