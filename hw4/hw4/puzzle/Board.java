@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.Queue;
 
 public class Board implements WorldState {
     private int[][] tiles;
-    private int N;
+    private int size;
     private final int BLANK = 0;
 
     /**
@@ -15,11 +15,11 @@ public class Board implements WorldState {
      */
     public Board(int[][] tiles) {
         // 新建一个数组，将入参数组的值拷贝到上面，最后赋值给 this.tiles
-        N = tiles.length;
-        this.tiles = new int[N][N];
+        size = tiles.length;
+        this.tiles = new int[size][size];
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 this.tiles[i][j] = tiles[i][j];
             }
         }
@@ -35,7 +35,7 @@ public class Board implements WorldState {
      * @return
      */
     public int tileAt(int i, int j) {
-        if (i < 0 || i > N - 1 || j < 0 || j > N - 1) {
+        if (i < 0 || i > size - 1 || j < 0 || j > size - 1) {
             throw new java.lang.IndexOutOfBoundsException("index error");
         }
 
@@ -48,7 +48,7 @@ public class Board implements WorldState {
      * @return
      */
     public int size() {
-        return N;
+        return size;
     }
 
     /**
@@ -101,10 +101,10 @@ public class Board implements WorldState {
         int cnt = 0;
         int num = 1;
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
 
-                if (i == N - 1 && j == N - 1) {
+                if (i == size - 1 && j == size - 1) {
                     continue;
                 }
 
@@ -121,21 +121,17 @@ public class Board implements WorldState {
 
     public int manhattan() {
         int sum = 0;
-        int num = 1;
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 int v = tiles[i][j];
                 if (v == 0) {
                     continue;
                 }
 
-                int targetRow = (v - 1) / N;
-                int targetCol = (v - 1) % N;
-
+                int targetRow = (v - 1) / size;
+                int targetCol = (v - 1) % size;
                 sum += (Math.abs(targetRow - i) + Math.abs(targetCol - j));
-
-                num += 1;
             }
         }
 
@@ -166,12 +162,12 @@ public class Board implements WorldState {
 
         Board board = (Board) y;
         int n = board.size();
-        if (N != n) {
+        if (size != n) {
             return false;
         }
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 if (tileAt(i, j) != board.tileAt(i, j)) {
                     return false;
                 }
