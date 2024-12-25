@@ -1,8 +1,24 @@
 package hw4.puzzle;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestBoard {
+
+    @Test
+    public void testHamming() {
+        int[][] a = new int[][] { { 8, 1, 3 }, { 4, 0, 2 }, { 7, 6, 5 } };
+        Board board = new Board(a);
+        assertEquals(5, board.hamming());
+    }
+
+    @Test
+    public void testManhattan() {
+        int[][] a = new int[][] { { 8, 1, 3 }, { 4, 0, 2 }, { 7, 6, 5 } };
+        Board board = new Board(a);
+        assertEquals(10, board.manhattan());
+    }
+
     @Test
     public void verifyImmutability() {
         int r = 2;
@@ -22,6 +38,9 @@ public class TestBoard {
         assertEquals("Your Board class is not being initialized with the right values.", 3, b.tileAt(1, 1));
 
         x[1][1] = 1000;
-        assertEquals("Your Board class is mutable and you should be making a copy of the values in the passed tiles array. Please see the FAQ!", 3, b.tileAt(1, 1));
+        assertEquals(
+                "Your Board class is mutable and you should be making a copy of the values in the passed tiles array. Please see the FAQ!",
+                3,
+                b.tileAt(1, 1));
     }
-} 
+}
