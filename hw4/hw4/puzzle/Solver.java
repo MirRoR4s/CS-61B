@@ -8,7 +8,8 @@ import edu.princeton.cs.algs4.LinearProbingHashST;
 public class Solver {
     private class SearchNode {
         private WorldState ws;
-        private int moves; // the number of moves made to reach this world state from the initial state.
+        private int moves; // the number of moves made to reach this world state-
+        // from the initial state.
         private SearchNode prev; // a reference to the previous search node.
         private int distance;
 
@@ -16,7 +17,7 @@ public class Solver {
             this.ws = ws;
             this.moves = moves;
             this.prev = prev;
-            
+
             Integer v = table.get(ws);
             if (v == null) {
                 int d = ws.estimatedDistanceToGoal();

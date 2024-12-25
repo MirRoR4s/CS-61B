@@ -43,4 +43,13 @@ public class TestBoard {
                 3,
                 b.tileAt(1, 1));
     }
+
+    @Test
+    public void testEquals() {
+        int[][] a = new int[][] { {1, 0}, {3, 2}};
+        Board board = new Board(a);
+        Board board2 = new Board(a);
+        assertEquals(true, board.equals(board2));
+
+    }
 }

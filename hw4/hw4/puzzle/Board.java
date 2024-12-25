@@ -151,8 +151,53 @@ public class Board implements WorldState {
         return manhattan();
     }
 
+    /**
+     * Returns true if this board's tile values are the same
+     * position as y's
+     */
+    @Override
     public boolean equals(Object y) {
-        return false;
+        if (this == y) {
+            return true;
+        }
+        if (y == null || getClass() != y.getClass()) {
+            return false;
+        }
+
+        Board board = (Board) y;
+        int n = board.size();
+        if (N != n) {
+            return false;
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (tileAt(i, j) != board.tileAt(i, j)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        if (tiles == null) {
+            return 0;
+        }
+
+        int result = 1; // 初始哈希值
+        for (int[] row : tiles) {
+            int rowHash = 1; // 每一行的哈希值
+            if (row != null) {
+                for (int value : row) {
+                    rowHash = 31 * rowHash + value; // 使用素数生成哈希值
+                }
+            }
+            result = 31 * result + rowHash; // 合并行哈希值
+        }
+        return result;
     }
 
     /**
