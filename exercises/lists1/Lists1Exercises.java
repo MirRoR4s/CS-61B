@@ -3,13 +3,13 @@ public class Lists1Exercises {
       * each element incremented by x. L is not allowed
       * to change. */
     public static IntList incrList(IntList L, int x) {
-        /* Your code here. */
         IntList result = new IntList(L.first + x, L.rest);
         IntList p = result;
         for (int i = 1; i < L.size(); i++) {
           p.rest = new IntList(L.get(i) + x, null);
           p = p.rest;
         }
+
         return result;
     }
 
@@ -17,12 +17,12 @@ public class Lists1Exercises {
       * each element incremented by x. Not allowed to use
       * the 'new' keyword. */
     public static IntList dincrList(IntList L, int x) {
-        /* Your code here. */
         IntList p = L;
         for (int i = 0; i < L.size(); i++) {
           p.first = L.get(i) + x;
           p = p.rest;
         }
+
         return L;
     }
 
